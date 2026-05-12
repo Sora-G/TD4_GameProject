@@ -45,16 +45,23 @@ public class MapGenerator : MonoBehaviour
         {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
     };
 
-    void Start()
-    {
-        GenerateMap();
-    }
+
+
+    //void Start()
+    //{
+    //    GenerateMap();
+    //}
+
+    [ContextMenu("Generate Map")]
 
     void GenerateMap()
     {
+        ClearMap();
+
         // èc
         for (int z = 0; z < map.GetLength(0); z++)
         {
+
             // â°
             for (int x = 0; x < map.GetLength(1); x++)
             {
@@ -62,22 +69,34 @@ public class MapGenerator : MonoBehaviour
                 if (map[z, x] == 1)
                 {
                     Instantiate(
-                        Wall,
-                        new Vector3(x, 1, z),
-                        Quaternion.identity
-                    );
+                           Wall,
+                           new Vector3(x, 1, z),
+                           Quaternion.identity,
+                          transform
+                       );
                 }
 
                 // 2Ç»ÇÁÉvÉåÉCÉÑÅ[ê∂ê¨
                 if (map[z, x] == 2)
                 {
                     Instantiate(
-                        Player_Tank,
-                        new Vector3(x, 1, z),
-                        Quaternion.identity
-                    );
+                           Player_Tank,
+                           new Vector3(x, 1, z),
+                           Quaternion.identity,
+                           transform
+                       );
+
                 }
             }
+        }
+    }
+    [ContextMenu("Clear Map")]
+
+    void ClearMap()
+    {
+        while (transform.childCount > 0)
+        {
+            DestroyImmediate(transform.GetChild(0).gameObject);
         }
     }
 }
