@@ -277,6 +277,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MapGenerator
   Wall: {fileID: 5760781364864673962, guid: 3aaaeafcc86c8ea4cb281e54481799fc, type: 3}
   Player_Tank: {fileID: 2672495161519734007, guid: dfb5339cafa9d9341a4050905a9ef88a, type: 3}
+  Enemy: {fileID: 1580411165051876037, guid: 843cec5eceebcac4db81463e73340b8c, type: 3}
 --- !u!4 &701669410
 Transform:
   m_ObjectHideFlags: 0
