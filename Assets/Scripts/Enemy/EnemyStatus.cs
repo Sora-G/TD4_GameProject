@@ -10,13 +10,17 @@ public class EnemyStatus : MonoBehaviour
         public float moveSpeed;
         public float rotateSpeed;
         public float serchRange;
+        public float lostRange;
+        public float attackRange;
     }
 
     //敵の種類を管理する列挙型
     public enum EnemyType
     {
         Normal,
-        Fast
+        Fast,
+        Hard,
+        Aggressive
     }
 
     //変数宣言
@@ -34,6 +38,8 @@ public class EnemyStatus : MonoBehaviour
                 currentStatus.moveSpeed = 2.0f;//移動速度を設定
                 currentStatus.rotateSpeed = 90.0f;//回転速度を設定
                 currentStatus.serchRange = 10.0f;//索敵範囲を設定
+                currentStatus.lostRange = 15.0f;//索敵を失う範囲を設定
+                currentStatus.attackRange = 14.0f;//攻撃範囲を設定
 
                 break;
 
@@ -41,9 +47,35 @@ public class EnemyStatus : MonoBehaviour
 
                 currentStatus.hp = 50;
                 currentStatus.attack = 5;
-                currentStatus.moveSpeed = 5.0f;
+                currentStatus.moveSpeed = 6.0f;
                 currentStatus.rotateSpeed = 180.0f;
                 currentStatus.serchRange = 10.0f;
+                currentStatus.lostRange = 15.0f;
+                currentStatus.attackRange = 14.0f;
+
+                break;
+
+            case EnemyType.Hard://硬い敵のステータスを設定
+
+                currentStatus.hp = 200;
+                currentStatus.attack = 20;
+                currentStatus.moveSpeed = 1.0f;
+                currentStatus.rotateSpeed = 45.0f;
+                currentStatus.serchRange = 10.0f;
+                currentStatus.lostRange = 15.0f;
+                currentStatus.attackRange = 14.0f;
+
+                break;
+
+            case EnemyType.Aggressive://攻撃的な敵のステータスを設定
+
+                currentStatus.hp = 150;
+                currentStatus.attack = 15;
+                currentStatus.moveSpeed = 4.0f;
+                currentStatus.rotateSpeed = 120.0f;
+                currentStatus.serchRange = 15.0f;
+                currentStatus.lostRange = 20.0f;
+                currentStatus.attackRange = 19.0f;
 
                 break;
         }

@@ -8,7 +8,7 @@ public class PlayerAttack : MonoBehaviour
 
     public GameObject bulletPrefab;//弾のプレハブ
 
-    private float attackInterval = 1.0f;//攻撃のインターバル
+    private float attackInterval = 0.5f;//攻撃のインターバル
     private float nextAttackTime = 0.0f;//次に攻撃できる時間
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
