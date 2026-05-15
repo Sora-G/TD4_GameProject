@@ -396,8 +396,8 @@ GameObject:
   - component: {fileID: 423622194}
   - component: {fileID: 423622200}
   - component: {fileID: 423622198}
-  - component: {fileID: 423622197}
-  - component: {fileID: 423622199}
+  - component: {fileID: 423622202}
+  - component: {fileID: 423622201}
   m_Layer: 0
   m_Name: Player_Tank
   m_TagString: Player
@@ -479,20 +479,6 @@ Transform:
   - {fileID: 1426003110}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &423622197
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 423622192}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2b2323eb800ec646ad147befde68349, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::player_move
-  moveSpeed: 0
-  rotateSpeed: 0
 --- !u!135 &423622198
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -514,22 +500,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &423622199
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 423622192}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 307054da2f3121b4388ec54e92179ebc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::player_attack
-  attackPosition: {x: 0, y: 0, z: 0}
-  attackRotation: {x: 0, y: 0, z: 0}
-  bulletPrefab: {fileID: 836285853692275351, guid: f7b7e0485190d3a4db11d41d3f8c83a6, type: 3}
-  attackInterval: 1
 --- !u!54 &423622200
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -557,6 +527,35 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &423622201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 423622192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 307054da2f3121b4388ec54e92179ebc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAttack
+  attackPosition: {x: 0, y: 0, z: 0}
+  attackRotation: {x: 0, y: 0, z: 0}
+  bulletPrefab: {fileID: 836285853692275351, guid: f7b7e0485190d3a4db11d41d3f8c83a6, type: 3}
+--- !u!114 &423622202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 423622192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2b2323eb800ec646ad147befde68349, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerMove
+  moveSpeed: 0
+  rotateSpeed: 0
 --- !u!1 &512099567
 GameObject:
   m_ObjectHideFlags: 0
@@ -729,35 +728,17 @@ GameObject:
   - component: {fileID: 1417844336}
   - component: {fileID: 1417844335}
   - component: {fileID: 1417844334}
-  - component: {fileID: 1417844333}
+  - component: {fileID: 1417844338}
+  - component: {fileID: 1417844340}
+  - component: {fileID: 1417844339}
+  - component: {fileID: 1417844341}
   m_Layer: 0
-  m_Name: Enemy_Basic_Tank
-  m_TagString: Enemy
+  m_Name: NormalEnemyTank
+  m_TagString: NormalEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &1417844333
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1417844332}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1417844334
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -824,13 +805,74 @@ Transform:
   m_GameObject: {fileID: 1417844332}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0, z: 5}
+  m_LocalPosition: {x: 0, y: -0, z: 20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 512099568}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &1417844338
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1417844332}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1417844339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1417844332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4618c6991fde80b4f8b81aaf0de13fc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyStatus
+  currentType: 0
+--- !u!114 &1417844340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1417844332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3ccc85953a14a54185074dce4e9f9fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyController
+  currentState: 0
+--- !u!114 &1417844341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1417844332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a8be5869f55ee54b8eb9af26b6c6535, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemySerch
+  changeDirectionTime: 3
+  serchRange: 10
 --- !u!1 &1426003109
 GameObject:
   m_ObjectHideFlags: 0

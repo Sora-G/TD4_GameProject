@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class player_move : MonoBehaviour
+public class PlayerMove : MonoBehaviour
 {
     //変数宣言
     public float moveSpeed;//移動速度

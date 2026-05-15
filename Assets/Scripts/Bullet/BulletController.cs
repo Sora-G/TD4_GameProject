@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class bullet : MonoBehaviour
+public class BulletController : MonoBehaviour
 {
     //変数宣言
     public GameObject owner;//弾の発射元を特定するための変数
@@ -14,7 +14,7 @@ public class bullet : MonoBehaviour
             Debug.Log("Playerが発射した");
         }
 
-        if (owner.CompareTag("Enemy"))
+        if (owner.CompareTag("NormalEnemy"))
         {
             Debug.Log("Enemyが発射した");
         }

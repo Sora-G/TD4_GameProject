@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class player_attack : MonoBehaviour
+public class PlayerAttack : MonoBehaviour
 {
     //変数宣言
     public Vector3 attackPosition;//攻撃する位置
@@ -8,7 +8,7 @@ public class player_attack : MonoBehaviour
 
     public GameObject bulletPrefab;//弾のプレハブ
 
-    public float attackInterval = 1.0f;//攻撃のインターバル
+    private float attackInterval = 1.0f;//攻撃のインターバル
     private float nextAttackTime = 0.0f;//次に攻撃できる時間
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -40,7 +40,7 @@ public class player_attack : MonoBehaviour
             bulletObject.tag = "PlayerBullet";
 
             //弾のスクリプトを取得
-            bullet bulletScript = bulletObject.GetComponent<bullet>();
+            BulletController bulletScript = bulletObject.GetComponent<BulletController>();
 
             //発射者を代入
             bulletScript.owner = gameObject;
