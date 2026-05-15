@@ -3,16 +3,24 @@
   "WorkspaceRootPath": "C:\\\u30C1\u30FC\u30E0\u5236\u4F5C(Unity)\\TD4_GameProject\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0650FF70-5EFE-B5AF-5168-5C915B0E87AB}|Assembly-CSharp.csproj|C:\\\u30C1\u30FC\u30E0\u5236\u4F5C(Unity)\\TD4_GameProject\\assets\\scripts\\mapwall\\mapgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{0650FF70-5EFE-B5AF-5168-5C915B0E87AB}|Assembly-CSharp.csproj|C:\\\u30C1\u30FC\u30E0\u5236\u4F5C(Unity)\\TD4_GameProject\\assets\\scripts\\spinfloor\\spinflooreffect.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0650FF70-5EFE-B5AF-5168-5C915B0E87AB}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\spinfloor\\spinflooreffect.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0650FF70-5EFE-B5AF-5168-5C915B0E87AB}|Assembly-CSharp.csproj|c:\\\u30C1\u30FC\u30E0\u5236\u4F5C(unity)\\td4_gameproject\\assets\\scripts\\player\\player_move.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0650FF70-5EFE-B5AF-5168-5C915B0E87AB}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\player\\player_move.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0650FF70-5EFE-B5AF-5168-5C915B0E87AB}|Assembly-CSharp.csproj|c:\\\u30C1\u30FC\u30E0\u5236\u4F5C(unity)\\td4_gameproject\\assets\\scripts\\mapwall\\mapgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0650FF70-5EFE-B5AF-5168-5C915B0E87AB}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\mapwall\\mapgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0650FF70-5EFE-B5AF-5168-5C915B0E87AB}|Assembly-CSharp.csproj|c:\\\u30C1\u30FC\u30E0\u5236\u4F5C(unity)\\td4_gameproject\\assets\\scripts\\damagefloor\\damagefloor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{0650FF70-5EFE-B5AF-5168-5C915B0E87AB}|Assembly-CSharp.csproj|C:\\\u30C1\u30FC\u30E0\u5236\u4F5C(Unity)\\TD4_GameProject\\assets\\scripts\\damagefloor\\damagefloor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0650FF70-5EFE-B5AF-5168-5C915B0E87AB}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\damagefloor\\damagefloor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0650FF70-5EFE-B5AF-5168-5C915B0E87AB}|Assembly-CSharp.csproj|c:\\\u30C1\u30FC\u30E0\u5236\u4F5C(unity)\\td4_gameproject\\assets\\scripts\\spinfloor\\spinflooreffect.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0650FF70-5EFE-B5AF-5168-5C915B0E87AB}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\spinfloor\\spinflooreffect.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0650FF70-5EFE-B5AF-5168-5C915B0E87AB}|Assembly-CSharp.csproj|c:\\\u30C1\u30FC\u30E0\u5236\u4F5C(unity)\\td4_gameproject\\assets\\scripts\\breakwall\\breakwall.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0650FF70-5EFE-B5AF-5168-5C915B0E87AB}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\breakwall\\breakwall.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 39,
+          "SelectedChildIndex": 40,
           "Children": [
             {
               "$type": "Bookmark",
@@ -175,6 +183,32 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "player_move.cs",
+              "DocumentMoniker": "C:\\\u30C1\u30FC\u30E0\u5236\u4F5C(Unity)\\TD4_GameProject\\Assets\\Scripts\\Player\\player_move.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Player\\player_move.cs",
+              "ToolTip": "C:\\\u30C1\u30FC\u30E0\u5236\u4F5C(Unity)\\TD4_GameProject\\Assets\\Scripts\\Player\\player_move.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Player\\player_move.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAkwB0AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-15T03:54:01.761Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "BreakWall.cs",
+              "DocumentMoniker": "C:\\\u30C1\u30FC\u30E0\u5236\u4F5C(Unity)\\TD4_GameProject\\Assets\\Scripts\\BreakWall\\BreakWall.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\BreakWall\\BreakWall.cs",
+              "ToolTip": "C:\\\u30C1\u30FC\u30E0\u5236\u4F5C(Unity)\\TD4_GameProject\\Assets\\Scripts\\BreakWall\\BreakWall.cs",
+              "RelativeToolTip": "Assets\\Scripts\\BreakWall\\BreakWall.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-15T03:07:27.853Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "DamageFloor.cs",
               "DocumentMoniker": "C:\\\u30C1\u30FC\u30E0\u5236\u4F5C(Unity)\\TD4_GameProject\\Assets\\Scripts\\DamageFloor\\DamageFloor.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\DamageFloor\\DamageFloor.cs",
@@ -187,26 +221,26 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "SpinFloorEffect.cs",
               "DocumentMoniker": "C:\\\u30C1\u30FC\u30E0\u5236\u4F5C(Unity)\\TD4_GameProject\\Assets\\Scripts\\SpinFloor\\SpinFloorEffect.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\SpinFloor\\SpinFloorEffect.cs",
               "ToolTip": "C:\\\u30C1\u30FC\u30E0\u5236\u4F5C(Unity)\\TD4_GameProject\\Assets\\Scripts\\SpinFloor\\SpinFloorEffect.cs",
               "RelativeToolTip": "Assets\\Scripts\\SpinFloor\\SpinFloorEffect.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-15T02:59:30.685Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "MapGenerator.cs",
               "DocumentMoniker": "C:\\\u30C1\u30FC\u30E0\u5236\u4F5C(Unity)\\TD4_GameProject\\Assets\\Scripts\\MapWall\\MapGenerator.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\MapWall\\MapGenerator.cs",
               "ToolTip": "C:\\\u30C1\u30FC\u30E0\u5236\u4F5C(Unity)\\TD4_GameProject\\Assets\\Scripts\\MapWall\\MapGenerator.cs",
               "RelativeToolTip": "Assets\\Scripts\\MapWall\\MapGenerator.cs",
-              "ViewState": "AgIAABEAAAAAAAAAAAAQwBAAAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAAIUAAAAAAAAAAAAswJ8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-05-12T05:35:26.879Z",
               "EditorCaption": ""

@@ -149,7 +149,7 @@ public class MapGenerator : MonoBehaviour
         // =========================
         Instantiate(
             Player_Tank,
-            new Vector3(2, 0, 2),
+            new Vector3(2, -0.5f, 2),
             Quaternion.identity,
             transform
         );
