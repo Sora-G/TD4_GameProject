@@ -16,6 +16,7 @@ public class EnemyController : MonoBehaviour
     private EnemyStatus enemyStatus; // 敵のステータスを入れる変数
     private EnemySerch enemySerch; // 敵の探索処理を入れる変数
     private EnemyChase enemyChase; // 敵の追跡処理を入れる変数
+    private EnemyAttack enemyAttack; // 敵の攻撃処理を入れる変数
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -23,6 +24,7 @@ public class EnemyController : MonoBehaviour
         enemyStatus = GetComponent<EnemyStatus>();// 同じオブジェクトのEnemyStatusを取得
         enemySerch = GetComponent<EnemySerch>();// 同じオブジェクトのEnemySerchを取得
         enemyChase = GetComponent<EnemyChase>();// 同じオブジェクトのEnemyChaseを取得
+        enemyAttack = GetComponent<EnemyAttack>();// 同じオブジェクトのEnemyAttackを取得
         currentState = EnemyState.Serch;// 初期状態を探索状態に設定
     }
 
@@ -47,7 +49,7 @@ public class EnemyController : MonoBehaviour
                     currentState = EnemyState.Serch;// プレイヤーを見失ったら探索状態に遷移
                     Debug.Log("追跡→探索");
                 }
-                if(enemyChase.AttackPlayer()) {
+                if (enemyChase.AttackPlayer()){
                     currentState = EnemyState.Attack;// プレイヤーを攻撃する距離に入ったら攻撃状態に遷移
                     Debug.Log("追跡→攻撃");
                 }
@@ -56,6 +58,7 @@ public class EnemyController : MonoBehaviour
 
             case EnemyState.Attack:
                 // プレイヤーを攻撃する処理
+                enemyAttack.Attack();// プレイヤーを攻撃する処理を呼び出す
                 Debug.Log("攻撃中");
                 break;
 
