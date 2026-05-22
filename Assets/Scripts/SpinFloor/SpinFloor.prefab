@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2085616272725673005}
   - component: {fileID: 651186329582596748}
   - component: {fileID: 5907117786333187498}
+  - component: {fileID: -6314470139010170616}
   m_Layer: 0
   m_Name: SpinFloor
   m_TagString: Untagged
@@ -114,6 +115,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &-6314470139010170616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4197706688824016149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a33dfaaff379214a813990fa74bac1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpinFloor_anim
+  rotateSpeed: 100
 --- !u!1 &4748404898164586901
 GameObject:
   m_ObjectHideFlags: 0
@@ -180,3 +194,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b5ad155ad10894448562c62202bd506, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpinFloorEffect
+  reverseStartTime: 2
+  reverseDuration: 3
