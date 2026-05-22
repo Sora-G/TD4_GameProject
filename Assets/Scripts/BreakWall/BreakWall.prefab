@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8796614951451790871}
   - component: {fileID: 6331428235701301812}
   - component: {fileID: 4177138599535267954}
+  - component: {fileID: -4638121958456584692}
   m_Layer: 0
   m_Name: BreakWall
   m_TagString: Untagged
@@ -112,3 +113,16 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-4638121958456584692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5413506332400888293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bae367cf27ce02e4ea3d69bfdb8871b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BreakWall
+  hp: 3

@@ -91,7 +91,12 @@ public class MapGenerator : MonoBehaviour
                 // =========================
                 // プレイヤー周辺安全地帯
                 // =========================
-                if (x < 5 && z < 5)
+                int playerX = 4;
+                int playerZ = 4;
+                int safeRange = 5;
+
+                if (Mathf.Abs(x - playerX) <= safeRange &&
+                    Mathf.Abs(z - playerZ) <= safeRange)
                 {
                     continue;
                 }
