@@ -12,8 +12,10 @@ public class EnemyAttack : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        player = GameObject.Find("PlayerTank");//プレイヤーのオブジェクトを名前から取得
-        enemyStatus = GetComponent<EnemyStatus>();// 同じオブジェクトのEnemyStatusを取得
+        //プレイヤーのオブジェクトを名前から取得
+        player = GameObject.FindGameObjectWithTag("Player");
+        //同じオブジェクトのEnemyStatusを取得
+        enemyStatus = GetComponent<EnemyStatus>();
     }
 
     // Update is called once per frame
@@ -24,20 +26,61 @@ public class EnemyAttack : MonoBehaviour
 
     public void Attack()
     {
-        //まだ撃てない
-        if(Time.time < nextAttackTime) {
-            return;
-        }
-
         //Player方向取得
         Vector3 direction = player.transform.position - transform.position;
 
         //Y軸を無視
         direction.y = 0;
 
-        //Player方向を見る
-        transform.rotation = Quaternion.LookRotation(direction);
+        //Playerとの距離を取得
+        float distance =
+            Vector3.Distance(
+                transform.position,
+                player.transform.position
+            );
 
+        //Player方向を見る
+        //transform.rotation = Quaternion.LookRotation(direction);
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+
+        transform.rotation =
+            Quaternion.RotateTowards(
+                transform.rotation,
+                targetRotation,
+                enemyStatus.currentStatus.rotateSpeed * Time.deltaTime
+            );
+
+        //距離を保つ
+        if (distance > enemyStatus.currentStatus.keepDistance)
+        {
+            transform.position +=
+                transform.forward *
+                enemyStatus.currentStatus.moveSpeed *
+                Time.deltaTime;
+        }
+        else if (distance < enemyStatus.currentStatus.keepDistance - 2f)
+        {
+            transform.position -=
+                transform.forward *
+                enemyStatus.currentStatus.moveSpeed *
+                Time.deltaTime;
+        }
+
+        //まだ撃てない
+        if (Time.time < nextAttackTime)
+        {
+            return;
+        }
+
+        Fire();
+
+        //次に攻撃できる時間を更新
+        nextAttackTime = Time.time + attackInterval;
+    }
+
+    //攻撃処理
+    private void Fire()
+    {
         //弾の生成処理
         GameObject bulletObject = Instantiate(
             bulletPrefab,
@@ -58,9 +101,7 @@ public class EnemyAttack : MonoBehaviour
         //誰が撃ったか確認
         bulletScript.GetBulletOwner();
 
-        //次に攻撃できる時間を更新
-        nextAttackTime = Time.time + attackInterval;
-
         Debug.Log("敵が攻撃");
     }
+
 }

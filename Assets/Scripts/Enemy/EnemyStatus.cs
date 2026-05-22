@@ -12,6 +12,7 @@ public class EnemyStatus : MonoBehaviour
         public float serchRange;
         public float lostRange;
         public float attackRange;
+        public float keepDistance;
     }
 
     //敵の種類を管理する列挙型
@@ -40,6 +41,7 @@ public class EnemyStatus : MonoBehaviour
                 currentStatus.serchRange = 10.0f;//索敵範囲を設定
                 currentStatus.lostRange = 15.0f;//索敵を失う範囲を設定
                 currentStatus.attackRange = 14.0f;//攻撃範囲を設定
+                currentStatus.keepDistance = 8.0f;//距離を保つ範囲を設定
 
                 break;
 
@@ -52,6 +54,7 @@ public class EnemyStatus : MonoBehaviour
                 currentStatus.serchRange = 10.0f;
                 currentStatus.lostRange = 15.0f;
                 currentStatus.attackRange = 14.0f;
+                currentStatus.keepDistance = 8.0f;
 
                 break;
 
@@ -64,6 +67,7 @@ public class EnemyStatus : MonoBehaviour
                 currentStatus.serchRange = 10.0f;
                 currentStatus.lostRange = 15.0f;
                 currentStatus.attackRange = 14.0f;
+                currentStatus.keepDistance = 8.0f;
 
                 break;
 
@@ -76,6 +80,7 @@ public class EnemyStatus : MonoBehaviour
                 currentStatus.serchRange = 15.0f;
                 currentStatus.lostRange = 20.0f;
                 currentStatus.attackRange = 19.0f;
+                currentStatus.keepDistance = 8.0f;
 
                 break;
         }
