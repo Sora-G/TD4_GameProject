@@ -89,7 +89,7 @@ public class EnemyStatus : MonoBehaviour
     public void TakeDamage(int damage) 
     {
         currentStatus.hp -= damage;//ダメージを受ける処理
-        Debug.Log($"EnemyのHP:" + currentStatus.hp);
+        //Debug.Log("EnemyのHP:" + currentStatus.hp);
         if (currentStatus.hp <= 0) 
         {
             Die();//HPが0以下になったら死亡する処理
@@ -98,7 +98,12 @@ public class EnemyStatus : MonoBehaviour
 
     public void Die()
     {
-        Debug.Log("ヤラレチャッタ");
+        GameManager gm = FindObjectOfType<GameManager>();
+
+        if(gm != null)
+        {
+            gm.EnemyDefeated();//ゲームマネージャーに敵が倒されたことを伝える
+        }
         Destroy(gameObject);
     }
 

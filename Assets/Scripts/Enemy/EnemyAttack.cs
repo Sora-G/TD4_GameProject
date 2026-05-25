@@ -12,8 +12,6 @@ public class EnemyAttack : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //プレイヤーのオブジェクトを名前から取得
-        player = GameObject.FindGameObjectWithTag("Player");
         //同じオブジェクトのEnemyStatusを取得
         enemyStatus = GetComponent<EnemyStatus>();
     }
@@ -26,23 +24,36 @@ public class EnemyAttack : MonoBehaviour
 
     public void Attack()
     {
-        //Player方向取得
-        Vector3 direction = player.transform.position - transform.position;
+        // player が消えてたら再取得
+        if (player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
 
-        //Y軸を無視
+            // それでもいなければ探索状態に戻る
+            if (player == null)
+            {
+                EnemyController enemyController = GetComponent<EnemyController>();
+                if (enemyController != null)
+                {
+                    enemyController.currentState = EnemyController.EnemyState.Serch;
+                }
+                return;
+            }
+        }
+
+        // Player方向取得
+        Vector3 direction = player.transform.position - transform.position;
         direction.y = 0;
 
-        //Playerとの距離を取得
-        float distance =
-            Vector3.Distance(
-                transform.position,
-                player.transform.position
-            );
+        float distance = Vector3.Distance(
+            transform.position,
+            player.transform.position
+        );
 
-        //Player方向を見る
-        //transform.rotation = Quaternion.LookRotation(direction);
+        //Playerの方向を向くための回転を計算
         Quaternion targetRotation = Quaternion.LookRotation(direction);
 
+        //回転処理
         transform.rotation =
             Quaternion.RotateTowards(
                 transform.rotation,
@@ -50,7 +61,7 @@ public class EnemyAttack : MonoBehaviour
                 enemyStatus.currentStatus.rotateSpeed * Time.deltaTime
             );
 
-        //距離を保つ
+        //距離を保つ処理
         if (distance > enemyStatus.currentStatus.keepDistance)
         {
             transform.position +=
@@ -66,7 +77,6 @@ public class EnemyAttack : MonoBehaviour
                 Time.deltaTime;
         }
 
-        //まだ撃てない
         if (Time.time < nextAttackTime)
         {
             return;
@@ -74,7 +84,7 @@ public class EnemyAttack : MonoBehaviour
 
         Fire();
 
-        //次に攻撃できる時間を更新
+        //攻撃のクールタイム
         nextAttackTime = Time.time + attackInterval;
     }
 
@@ -101,7 +111,7 @@ public class EnemyAttack : MonoBehaviour
         //誰が撃ったか確認
         bulletScript.GetBulletOwner();
 
-        Debug.Log("敵が攻撃");
+        //Debug.Log("敵が攻撃");
     }
 
 }

@@ -63,7 +63,7 @@ public class EnemySerch : MonoBehaviour
         float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
         
         if(distanceToPlayer <= enemyStatus.currentStatus.serchRange) {
-            Debug.Log("プレイヤーを発見");
+            //Debug.Log("プレイヤーを発見");
             return true;//プレイヤーを発見
         }
         return false;//プレイヤーを発見できなかった

@@ -36,7 +36,12 @@ public class PlayerStatus : MonoBehaviour
 
     public void Die()
     {
-        Debug.Log("ゲームオーバー");
+        GameManager gm = FindFirstObjectByType<GameManager>();
+
+        if (gm != null)
+        {
+            gm.PlayerDefeated();//ゲームマネージャーにプレイヤーが倒されたことを伝える
+        }
         //Destroy(gameObject);
     }
 

@@ -36,9 +36,9 @@ public class EnemyController : MonoBehaviour
                 enemySerch.Patrol();// プレイヤーを探す処理を呼び出す
                 if(enemySerch.DetectPlayer()) {
                     currentState = EnemyState.Chase;// プレイヤーを発見したら追いかける状態に遷移
-                    Debug.Log("探索→追跡");
+                    //Debug.Log("探索→追跡");
                 }
-                Debug.Log("探索中");
+                //Debug.Log("探索中");
                 break;
 
             case EnemyState.Chase:
@@ -46,19 +46,19 @@ public class EnemyController : MonoBehaviour
                 enemyChase.ChasePlayer();// プレイヤーを追いかける処理を呼び出す
                 if(enemyChase.LostPlayer()) {
                     currentState = EnemyState.Serch;// プレイヤーを見失ったら探索状態に遷移
-                    Debug.Log("追跡→探索");
+                    //Debug.Log("追跡→探索");
                 }
                 if (enemyChase.AttackPlayer()){
                     currentState = EnemyState.Attack;// プレイヤーを攻撃する距離に入ったら攻撃状態に遷移
-                    Debug.Log("追跡→攻撃");
+                    //Debug.Log("追跡→攻撃");
                 }
-                Debug.Log("追跡中");
+                //Debug.Log("追跡中");
                 break;
 
             case EnemyState.Attack:
                 // プレイヤーを攻撃する処理
                 enemyAttack.Attack();// プレイヤーを攻撃する処理を呼び出す
-                Debug.Log("攻撃中");
+                //Debug.Log("攻撃中");
                 break;
         }
     }

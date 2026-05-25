@@ -11,17 +11,24 @@ public class BulletController : MonoBehaviour
     {
         if (owner.CompareTag("Player"))
         {
-            Debug.Log("Playerが発射した");
+            //Debug.Log("Playerが発射した");
         }
 
         if (owner.CompareTag("Enemy"))
         {
-            Debug.Log("Enemyが発射した");
+            //Debug.Log("Enemyが発射した");
         }
     }
 
     public void OnTriggerEnter(Collider other)
     {
+        //持ち主が消えたら消える
+        if (owner == null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         //弾の発射元がPlayerで、当たったオブジェクトがEnemyの場合
         if (owner.CompareTag("Player") && other.CompareTag("Enemy"))
         {
@@ -33,11 +40,11 @@ public class BulletController : MonoBehaviour
                 enemy.TakeDamage(player.currentStatus.attack);//EnemyのTakeDamage関数を呼び出してダメージを与える
             }
 
-            Debug.Log("Playerの弾がEnemyに当たった");
+            //Debug.Log("Playerの弾がEnemyに当たった");
             Destroy(gameObject);//弾を消す
         }
         //弾の発射元がEnemyで、当たったオブジェクトがPlayerの場合
-        if (owner.CompareTag("Enemy") && other.CompareTag("Player"))
+        else if (owner.CompareTag("Enemy") && other.CompareTag("Player"))
         {
             PlayerStatus player = other.GetComponent<PlayerStatus>();//当たったオブジェクトのPlayerStatusを取得
 
@@ -47,7 +54,7 @@ public class BulletController : MonoBehaviour
                 player.TakeDamage(enemy.currentStatus.attack);//PlayerのTakeDamage関数を呼び出してダメージを与える
             }
 
-            Debug.Log("Enemyの弾がPlayerに当たった");
+            //Debug.Log("Enemyの弾がPlayerに当たった");
             Destroy(gameObject);//弾を消す
         }
     }
