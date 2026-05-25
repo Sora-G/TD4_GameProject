@@ -86,6 +86,23 @@ public class EnemyStatus : MonoBehaviour
         }
     }
 
+    public void TakeDamage(int damage) 
+    {
+        currentStatus.hp -= damage;//ダメージを受ける処理
+        Debug.Log($"EnemyのHP:" + currentStatus.hp);
+        if (currentStatus.hp <= 0) 
+        {
+            Die();//HPが0以下になったら死亡する処理
+        }
+    }
+
+    public void Die()
+    {
+        Debug.Log("ヤラレチャッタ");
+        Destroy(gameObject);
+    }
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

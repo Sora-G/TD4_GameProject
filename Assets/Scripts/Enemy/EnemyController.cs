@@ -8,7 +8,6 @@ public class EnemyController : MonoBehaviour
         Serch,      // プレイヤーを探す状態
         Chase,      // プレイヤーを追いかける状態
         Attack,     // プレイヤーを攻撃する状態
-        Dead        // 死んでいる状態
     }
 
     //変数宣言
@@ -60,11 +59,6 @@ public class EnemyController : MonoBehaviour
                 // プレイヤーを攻撃する処理
                 enemyAttack.Attack();// プレイヤーを攻撃する処理を呼び出す
                 Debug.Log("攻撃中");
-                break;
-
-            case EnemyState.Dead:
-                // 死んでいる処理
-                Debug.Log("死亡中");
                 break;
         }
     }

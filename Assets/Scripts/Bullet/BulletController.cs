@@ -14,9 +14,41 @@ public class BulletController : MonoBehaviour
             Debug.Log("Playerが発射した");
         }
 
-        if (owner.CompareTag("NormalEnemy"))
+        if (owner.CompareTag("Enemy"))
         {
             Debug.Log("Enemyが発射した");
+        }
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        //弾の発射元がPlayerで、当たったオブジェクトがEnemyの場合
+        if (owner.CompareTag("Player") && other.CompareTag("Enemy"))
+        {
+            EnemyStatus enemy = other.GetComponent<EnemyStatus>();//当たったオブジェクトのEnemyStatusを取得
+
+            if(enemy != null)
+            {
+                PlayerStatus player = owner.GetComponent<PlayerStatus>();//弾の発射元のPlayerStatusを取得
+                enemy.TakeDamage(player.currentStatus.attack);//EnemyのTakeDamage関数を呼び出してダメージを与える
+            }
+
+            Debug.Log("Playerの弾がEnemyに当たった");
+            Destroy(gameObject);//弾を消す
+        }
+        //弾の発射元がEnemyで、当たったオブジェクトがPlayerの場合
+        if (owner.CompareTag("Enemy") && other.CompareTag("Player"))
+        {
+            PlayerStatus player = other.GetComponent<PlayerStatus>();//当たったオブジェクトのPlayerStatusを取得
+
+            if (player != null)
+            {
+                EnemyStatus enemy = owner.GetComponent<EnemyStatus>();//弾の発射元のEnemyStatusを取得
+                player.TakeDamage(enemy.currentStatus.attack);//PlayerのTakeDamage関数を呼び出してダメージを与える
+            }
+
+            Debug.Log("Enemyの弾がPlayerに当たった");
+            Destroy(gameObject);//弾を消す
         }
     }
 
