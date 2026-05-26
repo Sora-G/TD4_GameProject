@@ -57,6 +57,18 @@ public class BulletController : MonoBehaviour
             //Debug.Log("Enemyの弾がPlayerに当たった");
             Destroy(gameObject);//弾を消す
         }
+        //弾の発射元がPlayerで、当たったオブジェクトがHardWallの場合
+        else if (owner.CompareTag("Player") && other.CompareTag("HardWall"))
+        {
+            //Debug.Log("Enemyの弾がPlayerに当たった");
+            Destroy(gameObject);//弾を消す
+        }
+        //弾の発射元がPlayerで、当たったオブジェクトがHardWallの場合
+        else if (owner.CompareTag("Enemy") && other.CompareTag("HardWall"))
+        {
+            //Debug.Log("Enemyの弾がPlayerに当たった");
+            Destroy(gameObject);//弾を消す
+        }
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

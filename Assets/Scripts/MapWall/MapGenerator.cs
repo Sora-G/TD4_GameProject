@@ -51,7 +51,7 @@ public class MapGenerator : MonoBehaviour
     public int spinFloorPercent = 5;
 
     //コアの種類
-    public GameObject[] corePrefabs;
+    //public GameObject[] corePrefabs;
 
     void Start()
     {
@@ -289,15 +289,15 @@ public class MapGenerator : MonoBehaviour
 
 
                 //コア
-                if (Random.Range(0, 100) < 5)
-                {
-                    Instantiate(
-                        corePrefabs[Random.Range(0, corePrefabs.Length)],
-                        new Vector3(x, 0, z),
-                        Quaternion.identity,
-                        transform
-                    );
-                }
+                //if (Random.Range(0, 100) < 5)
+                //{
+                //    Instantiate(
+                //        corePrefabs[Random.Range(0, corePrefabs.Length)],
+                //        new Vector3(x, 0, z),
+                //        Quaternion.identity,
+                //        transform
+                //    );
+                //}
             }
         }
 
@@ -330,27 +330,48 @@ public class MapGenerator : MonoBehaviour
                     Random.Range(6, height - 3)
                 );
 
-                // 円形じゃないならそのままOK
-                if (currentStageType != StageType.Circle)
+                // 円形ステージチェック
+                if (currentStageType == StageType.Circle)
                 {
-                    break;
+                    float centerX = (width - 1) / 2f;
+                    float centerZ = (height - 1) / 2f;
+                    float radius = width / 2f - 1;
+
+                    float dx = enemyPos.x - centerX;
+                    float dz = enemyPos.z - centerZ;
+
+                    float distance = Mathf.Sqrt(dx * dx + dz * dz);
+
+                    if (distance >= radius)
+                    {
+                        continue;
+                    }
                 }
 
-                // 円形なら円内チェック
-                float centerX = (width - 1) / 2f;
-                float centerZ = (height - 1) / 2f;
-                float radius = width / 2f - 1;
+                // 壁チェック
+                Collider[] hitColliders =
+                    Physics.OverlapSphere(enemyPos, 0.4f);
 
-                float dx = enemyPos.x - centerX;
-                float dz = enemyPos.z - centerZ;
+                bool canSpawn = true;
 
-                float distance = Mathf.Sqrt(dx * dx + dz * dz);
-
-                // 円内ならOK
-                if (distance < radius)
+                foreach (Collider hit in hitColliders)
                 {
-                    break;
+                    if (hit.CompareTag("HardWall") ||
+                        hit.CompareTag("BreakWall") ||
+                        hit.CompareTag("Player"))
+                    {
+                        canSpawn = false;
+                        break;
+                    }
                 }
+
+                if (!canSpawn)
+                {
+                    continue;
+                }
+
+                // 問題なければ生成
+                break;
             }
 
             Instantiate(
