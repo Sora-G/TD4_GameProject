@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 6eeb27fd2d0af004e915eb7fed391468
+=======
+guid: 8409d3b8b04f85b4eaaadf5412573e42
+>>>>>>> feature/starge-generation
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

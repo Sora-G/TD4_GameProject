@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: d8a962a1ced0d3f4dbb9235648145709
+=======
+guid: 136ae0dde261fab489e2a8d3d02dedcd
+>>>>>>> feature/starge-generation
 DefaultImporter:
   externalObjects: {}
   userData: 
