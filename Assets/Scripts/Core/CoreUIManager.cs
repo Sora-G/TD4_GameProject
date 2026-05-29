@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CoreUIManager : MonoBehaviour
 {
@@ -6,14 +7,15 @@ public class CoreUIManager : MonoBehaviour
 
     [Header("UI全体の設定")]
     public GameObject coreUI;
+    public Transform tempStorage; // TempStorageのRectTransformを入れる場所
 
-    [Header("インベントリの4つのスロット(Slot1~4)を順番に入れる")]
-    public GameObject[] inventorySlots; // インスペクターで4つのSlotオブジェクトを設定する
+    [Header("プレハブ設定")]
+    public GameObject stockSlotPrefab; // 先ほど作った StockSlotPrefab を入れる
 
-    [Header("表示するコアのプレハブ（または非表示のアイコンオブジェクト）")]
-    public GameObject atkCoreIcon;
-    public GameObject defCoreIcon;
-    public GameObject spdCoreIcon;
+    [Header("コアの色設定")]
+    public Color atkColor = Color.red;
+    public Color defColor = Color.blue;
+    public Color spdColor = Color.yellow;
 
     private bool isOpen = false;
 
@@ -29,11 +31,6 @@ public class CoreUIManager : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1;
-
-        // 最初はアイコンを全部非表示にしておく
-        if (atkCoreIcon != null) atkCoreIcon.SetActive(false);
-        if (defCoreIcon != null) defCoreIcon.SetActive(false);
-        if (spdCoreIcon != null) spdCoreIcon.SetActive(false);
     }
 
     void Update()
@@ -53,44 +50,37 @@ public class CoreUIManager : MonoBehaviour
         Time.timeScale = isOpen ? 0 : 1;
     }
 
-    // コアを拾った時に呼ばれる関数
+    // コアを拾った時に呼ばれる関数（何個でも新しく生成する）
     public void AcquireCore(string type)
     {
-        Debug.Log(type + " コアを入手！空いているスロットを探します。");
+        Debug.Log(type + " コアを入手！新しいストックマスを生成します。");
 
-        // 1. まず空いているスロット（子要素がいないマス）を探す
-        Transform emptySlot = null;
-        foreach (GameObject slotObject in inventorySlots)
+        if (stockSlotPrefab == null || tempStorage == null)
         {
-            if (slotObject != null && slotObject.transform.childCount == 0)
-            {
-                emptySlot = slotObject.transform;
-                break; // 空きが見つかったのでループを抜ける
-            }
-        }
-
-        // もし空きスロットがなければ何もしない（インベントリ満杯）
-        if (emptySlot == null)
-        {
-            Debug.LogWarning("インベントリが満杯です！");
+            Debug.LogError("UIManagerのインスペクター設定が不足しています！");
             return;
         }
 
-        // 2. 拾った種類に応じたアイコンを選択する
-        GameObject targetIcon = null;
-        switch (type)
+        // 1. プレハブから新しくマス（スロット）を生成し、TempStorageの子供にする
+        GameObject newSlot = Instantiate(stockSlotPrefab, tempStorage);
+        newSlot.name = type + "_StockSlot";
+
+        // 2. そのマスの色を、拾ったコアの種類に合わせて塗り替える
+        Image slotImage = newSlot.GetComponent<Image>();
+        if (slotImage != null)
         {
-            case "ATK": targetIcon = atkCoreIcon; break;
-            case "DEF": targetIcon = defCoreIcon; break;
-            case "SPD": targetIcon = spdCoreIcon; break;
+            switch (type)
+            {
+                case "ATK": slotImage.color = atkColor; break;
+                case "DEF": slotImage.color = defColor; break;
+                case "SPD": slotImage.color = spdColor; break;
+            }
         }
 
-        // 3. 見つかった空きスロットの中にアイコンを引っ越しさせて表示する！
-        if (targetIcon != null)
-        {
-            targetIcon.transform.SetParent(emptySlot); // 親を空きスロットに変更
-            targetIcon.transform.localPosition = Vector3.zero; // 位置を中央にリセット
-            targetIcon.SetActive(true); // 表示する
-        }
+        // 3. 元々Slotに付いている「CoreSlot」などのスクリプトが誤作動しないよう調整
+        // （必要に応じて、ドラッグ可能なコンポーネントをここで制御できます）
+
+        // 自動でインベントリ画面を開く
+        if (!isOpen) ToggleCoreUI();
     }
 }

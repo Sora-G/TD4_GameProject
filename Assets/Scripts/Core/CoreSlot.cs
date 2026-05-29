@@ -24,7 +24,7 @@ public class CoreSlot : MonoBehaviour, IDropHandler
                 // 今このスロットにいる既存のコア（子要素）を取得
                 Transform existingCore = transform.GetChild(0);
 
-                // ドラッグ元（元々コアが置いてあった場所）の情報を取得
+                // ドラッグ元（元々コアが置いてあった場所、あるいはTempStorage）の情報を取得
                 Transform previousSlot = dragObject.parentReturnTo;
 
                 // 既存のコアを、ドラッグ元のスロットに引っ越しさせる
