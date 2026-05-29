@@ -18,9 +18,11 @@ public class PlayerStatus : MonoBehaviour
     //プレイヤーが攻撃を受ける処理
     public void TakeDamage(int attackPower)
     {
-        currentStatus.hp -= attackPower;
+        if(currentStatus.hp < 1) return;//HPが0未満のときはダメージを受けない
+        currentStatus.hp -= attackPower;//ダメージを受ける処理
         Debug.Log("PlayerのHP:" + currentStatus.hp + "Playerの残機:" + currentStatus.lives);
-        if(currentStatus.hp <= 0)
+        //HPが0未満になったときの処理
+        if (currentStatus.hp < 1)
         {
             if(currentStatus.lives >= 1)
             {
@@ -36,6 +38,7 @@ public class PlayerStatus : MonoBehaviour
 
     public void Die()
     {
+        //プレイヤーが倒されたときの処理
         GameManager gm = FindFirstObjectByType<GameManager>();
 
         if (gm != null)

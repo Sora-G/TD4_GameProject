@@ -13,6 +13,7 @@ public class EnemyStatus : MonoBehaviour
         public float lostRange;
         public float attackRange;
         public float keepDistance;
+        public bool isDead;
     }
 
     //敵の種類を管理する列挙型
@@ -42,6 +43,7 @@ public class EnemyStatus : MonoBehaviour
                 currentStatus.lostRange = 15.0f;//索敵を失う範囲を設定
                 currentStatus.attackRange = 14.0f;//攻撃範囲を設定
                 currentStatus.keepDistance = 8.0f;//距離を保つ範囲を設定
+                currentStatus.isDead = false;//死亡しているかどうかを設定
 
                 break;
 
@@ -55,6 +57,7 @@ public class EnemyStatus : MonoBehaviour
                 currentStatus.lostRange = 15.0f;
                 currentStatus.attackRange = 14.0f;
                 currentStatus.keepDistance = 8.0f;
+                currentStatus.isDead = false;
 
                 break;
 
@@ -68,6 +71,7 @@ public class EnemyStatus : MonoBehaviour
                 currentStatus.lostRange = 15.0f;
                 currentStatus.attackRange = 14.0f;
                 currentStatus.keepDistance = 8.0f;
+                currentStatus.isDead = false;
 
                 break;
 
@@ -81,6 +85,7 @@ public class EnemyStatus : MonoBehaviour
                 currentStatus.lostRange = 20.0f;
                 currentStatus.attackRange = 19.0f;
                 currentStatus.keepDistance = 8.0f;
+                currentStatus.isDead = false;
 
                 break;
         }
@@ -88,6 +93,8 @@ public class EnemyStatus : MonoBehaviour
 
     public void TakeDamage(int damage) 
     {
+        if(currentStatus.isDead) return;//すでに死亡している場合はダメージを受けない
+
         currentStatus.hp -= damage;//ダメージを受ける処理
         //Debug.Log("EnemyのHP:" + currentStatus.hp);
         if (currentStatus.hp <= 0) 
@@ -98,6 +105,10 @@ public class EnemyStatus : MonoBehaviour
 
     public void Die()
     {
+        if (currentStatus.isDead) return;//すでに死亡している場合はダメージを受けない
+
+        currentStatus.isDead = true;//死亡フラグを立てる
+
         GameManager gm = FindObjectOfType<GameManager>();
 
         if(gm != null)

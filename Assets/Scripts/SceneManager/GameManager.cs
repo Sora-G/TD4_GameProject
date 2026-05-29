@@ -5,6 +5,8 @@ public class GameManager : MonoBehaviour
     //変数宣言
     public int enemyCount;//敵の数
     public bool isGameOver = false;//ゲームオーバーかどうか
+    public GameClearManager gameClearManager;//ゲームクリアマネージャーの参照
+    public GameOverManager gameOverManager;//ゲームオーバーマネージャーの参照
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -31,15 +33,37 @@ public class GameManager : MonoBehaviour
     //ゲームに勝利したときの処理
     void WinGame()
     {
+        if (isGameOver) return;
+
         isGameOver = true;
         Debug.Log("You Win!!");
+
+        if (gameClearManager != null)
+        {
+            gameClearManager.ChangeGameClear();
+        }
+        else
+        {
+            Debug.LogError("GameClearManager が GameManager にセットされていません！");
+        }
     }
 
     //ゲームに敗北したときの処理
     void LoseGame()
     {
+        if (isGameOver) return;
+
         isGameOver = true;
         Debug.Log("You Lose...");
+
+        if (gameClearManager != null)
+        {
+            gameClearManager.ChangeGameClear();
+        }
+        else
+        {
+            Debug.LogError("GameOverManager が GameManager にセットされていません！");
+        }
     }
 
     // Update is called once per frame
