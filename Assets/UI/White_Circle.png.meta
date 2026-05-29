@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4ee332030848b8f448e2d8f928aa5858
+guid: 432efda4ab6ff3b478ffc6fbf64a820f
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -95,34 +95,12 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: PlayerLife
-      rect:
-        serializedVersion: 2
-        x: 88
-        y: 598
-        width: 106
-        height: 95
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 827efb590384f6d45a938522e329b8f0
-      internalID: 176468455
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 8ccb9b8c18085f2499fa07bc1daa80c6
     internalID: 0
     vertices: []
     indices: 
@@ -132,7 +110,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      PlayerLife: 176468455
+      White_Circle_0: -1945421225
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
