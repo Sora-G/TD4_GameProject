@@ -51,7 +51,7 @@ public class MapGenerator : MonoBehaviour
     public int spinFloorPercent = 5;
 
     //コアの種類
-    //public GameObject[] corePrefabs;
+    public GameObject[] corePrefabs;
 
     void Start()
     {
@@ -289,15 +289,15 @@ public class MapGenerator : MonoBehaviour
 
 
                 //コア
-                //if (Random.Range(0, 100) < 5)
-                //{
-                //    Instantiate(
-                //        corePrefabs[Random.Range(0, corePrefabs.Length)],
-                //        new Vector3(x, 0, z),
-                //        Quaternion.identity,
-                //        transform
-                //    );
-                //}
+                if (Random.Range(0, 100) < 5)
+                {
+                    Instantiate(
+                        corePrefabs[Random.Range(0, corePrefabs.Length)],
+                        new Vector3(x, 0, z),
+                        Quaternion.identity,
+                        transform
+                    );
+                }
             }
         }
 

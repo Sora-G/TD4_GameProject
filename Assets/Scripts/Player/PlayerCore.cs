@@ -8,48 +8,48 @@ public class PlayerCore : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        // 触れたオブジェクトから Core スクリプトを取得
         Core core = other.GetComponent<Core>();
 
         if (core != null)
         {
-            ApplyCore(core.coreType);
+            // --- 修正ポイント ---
+            // coreType (enum) を文字列（"ATK", "DEF", "SPD"）に変換してUIマネージャーに送る
+            string typeStr = "";
+            switch (core.coreType)
+            {
+                case CoreType.Attack: typeStr = "ATK"; break;
+                case CoreType.Defense: typeStr = "DEF"; break;
+                case CoreType.Speed: typeStr = "SPD"; break;
+            }
 
+            // UIマネージャーに通知して、インベントリ内にアイコンを表示させる！
+            if (CoreUIManager.Instance != null)
+            {
+                CoreUIManager.Instance.AcquireCore(typeStr);
+            }
+
+            // コアを消去する
             Destroy(other.gameObject);
         }
     }
 
-    void ApplyCore(CoreType type)
+    // ★このステータスを上げる関数は、後で「装備エリアにドロップした瞬間」に呼び出すようにします
+    public void ApplyCore(string type)
     {
         switch (type)
         {
-            case CoreType.Attack:
-
+            case "ATK":
                 attack += 1;
-
-                Debug.Log(
-                    "ATK UP! 現在の攻撃力 : " + attack
-                );
-
+                Debug.Log("装備完了！現在の攻撃力 : " + attack);
                 break;
-
-            case CoreType.Defense:
-
+            case "DEF":
                 defense += 1;
-
-                Debug.Log(
-                    "DEF UP! 現在の防御力 : " + defense
-                );
-
+                Debug.Log("装備完了！現在の防御力 : " + defense);
                 break;
-
-            case CoreType.Speed:
-
+            case "SPD":
                 speed += 1f;
-
-                Debug.Log(
-                    "SPD UP! 現在の速度 : " + speed
-                );
-
+                Debug.Log("装備完了！現在の速度 : " + speed);
                 break;
         }
     }
