@@ -16,6 +16,7 @@ public class PlayerStatus : MonoBehaviour
     //変数宣言
     public Status currentStatus;//プレイヤーのステータスを管理する変数
     public UnityEngine.UI.Slider hpSlider;//HPを表示するスライダー
+    public UnityEngine.UI.Slider lifeSlider;//残機を表示するスライダー
 
     //プレイヤーが攻撃を受ける処理
     public void TakeDamage(int attackPower)
@@ -35,6 +36,7 @@ public class PlayerStatus : MonoBehaviour
                 currentStatus.hp = 100;//体力を戻す処理
 
                 UpdateHPSlider();//HPスライダーを更新する処理
+                UpdateLifeSlider();//残機スライダーを更新する処理
             }
             else
             {
@@ -55,11 +57,21 @@ public class PlayerStatus : MonoBehaviour
         //Destroy(gameObject);
     }
 
+    //残機スライダーを更新する処理
     private void UpdateHPSlider()
     {
         if (hpSlider != null)
         {
             hpSlider.value = currentStatus.hp;//HPスライダーの値を更新する処理
+        }
+    }
+
+    //残機スライダーを更新する処理
+    private void UpdateLifeSlider()
+    {
+        if (lifeSlider != null)
+        {
+            lifeSlider.value = currentStatus.lives;//残機スライダーの値を更新する処理
         }
     }
 
@@ -82,17 +94,34 @@ public class PlayerStatus : MonoBehaviour
             }
         }
 
+        // 残機スライダーがまだ割り当てられていない場合、シーン内から探す
+        if (lifeSlider == null)
+        {
+            GameObject lifeBarObj = GameObject.Find("PlayerLifeBar");
+            if (lifeBarObj != null) 
+            {
+                lifeSlider = lifeBarObj.GetComponent<UnityEngine.UI.Slider>();
+            }
+        }
+
         // HPスライダーが見つかった場合、最大値を設定して現在のHPを反映
         if (hpSlider != null)
         {
             hpSlider.maxValue = currentStatus.hp; // 最大値を100にする
             UpdateHPSlider();                    // 現在のHP（100）をバーに反映
         }
+
+        // 残機スライダーが見つかった場合、最大値を設定して現在の残機を反映
+        if (lifeSlider != null)
+        {
+            lifeSlider.maxValue = currentStatus.lives; // 最大値を3にする
+            UpdateLifeSlider();                       // 現在の残機（3）をバーに反映
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        UpdateHPSlider();
     }
 }
