@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerStatus : MonoBehaviour
 {
@@ -14,20 +15,26 @@ public class PlayerStatus : MonoBehaviour
 
     //変数宣言
     public Status currentStatus;//プレイヤーのステータスを管理する変数
+    public UnityEngine.UI.Slider hpSlider;//HPを表示するスライダー
 
     //プレイヤーが攻撃を受ける処理
     public void TakeDamage(int attackPower)
     {
         if(currentStatus.hp < 1) return;//HPが0未満のときはダメージを受けない
         currentStatus.hp -= attackPower;//ダメージを受ける処理
+
+        UpdateHPSlider();//HPスライダーを更新する処理
+
         Debug.Log("PlayerのHP:" + currentStatus.hp + "Playerの残機:" + currentStatus.lives);
         //HPが0未満になったときの処理
         if (currentStatus.hp < 1)
         {
             if(currentStatus.lives >= 1)
             {
-                currentStatus.lives--;
-                currentStatus.hp = 100;
+                currentStatus.lives--;//残機を減らす処理
+                currentStatus.hp = 100;//体力を戻す処理
+
+                UpdateHPSlider();//HPスライダーを更新する処理
             }
             else
             {
@@ -48,6 +55,14 @@ public class PlayerStatus : MonoBehaviour
         //Destroy(gameObject);
     }
 
+    private void UpdateHPSlider()
+    {
+        if (hpSlider != null)
+        {
+            hpSlider.value = currentStatus.hp;//HPスライダーの値を更新する処理
+        }
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -56,6 +71,23 @@ public class PlayerStatus : MonoBehaviour
         currentStatus.attack = 10;//攻撃力を設定
         currentStatus.moveSpeed = 2.0f;//移動速度を設定
         currentStatus.rotateSpeed = 75.0f;//回転速度を設定
+
+        // HPスライダーがまだ割り当てられていない場合、シーン内から探す
+        if (hpSlider == null)
+        {
+            GameObject hpBarObj = GameObject.Find("PlayerHPBar");
+            if (hpBarObj != null)
+            {
+                hpSlider = hpBarObj.GetComponent<UnityEngine.UI.Slider>();
+            }
+        }
+
+        // HPスライダーが見つかった場合、最大値を設定して現在のHPを反映
+        if (hpSlider != null)
+        {
+            hpSlider.maxValue = currentStatus.hp; // 最大値を100にする
+            UpdateHPSlider();                    // 現在のHP（100）をバーに反映
+        }
     }
 
     // Update is called once per frame
