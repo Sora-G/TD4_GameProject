@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 432efda4ab6ff3b478ffc6fbf64a820f
+guid: 903cad62603925846a1b2d157f4325fe
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -95,12 +95,34 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: GameOverBG_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1920
+        height: 1075
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b89a007299a17f24ea1e9d5975bc7b8e
+      internalID: 551229095
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 8ccb9b8c18085f2499fa07bc1daa80c6
+    spriteID: 09e63bac6d9ac7f479903368e175ca71
     internalID: 0
     vertices: []
     indices: 
@@ -110,7 +132,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      White_Circle_0: -1945421225
+      GameOverBG_0: 551229095
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
