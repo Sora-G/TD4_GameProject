@@ -1,56 +1,61 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class PlayerCore : MonoBehaviour
 {
-    public int attack = 1;
-    public int defense = 1;
-    public float speed = 5f;
+    [Header("ç”Ÿæˆã™ã‚‹UIãƒ‘ãƒ¼ãƒ„ã®ãƒ—ãƒ¬ãƒãƒ–")]
+    public GameObject stockSlotPrefab;
 
-    private void OnTriggerEnter(Collider other)
+    [Header("SpawnAreaã®ãƒ—ãƒ¬ãƒãƒ– (ã“ã“ã«Projectã®ãƒ—ãƒ¬ãƒãƒ–ã‚’ç½®ã„ã¦OK)")]
+    public GameObject spawnAreaPrefab;
+
+    [Header("ãƒ†ã‚¹ãƒˆç”¨ã®ã‚³ã‚¢ãƒ‡ãƒ¼ã‚¿")]
+    public CoreData testCoreData;
+
+    // å†…éƒ¨ã§å®Ÿéš›ã«ä½¿ã†å®Ÿä½“ï¼ˆã‚¯ãƒ­ãƒ¼ãƒ³ï¼‰ç”¨ã®å¤‰æ•°
+    private Transform activeSpawnArea;
+
+    void Start()
     {
-        // G‚ê‚½ƒIƒuƒWƒFƒNƒg‚©‚ç Core ƒXƒNƒŠƒvƒg‚ğæ“¾
-        Core core = other.GetComponent<Core>();
-
-        if (core != null)
+        // ğŸ¯ 1. ã‚‚ã—SpawnAreaã®ãƒ—ãƒ¬ãƒãƒ–ãŒè¨­å®šã•ã‚Œã¦ã„ãŸã‚‰ã€ç”»é¢ä¸Šï¼ˆCanvasï¼‰ã«å®Ÿä½“åŒ–ã™ã‚‹
+        if (spawnAreaPrefab != null)
         {
-            // --- C³ƒ|ƒCƒ“ƒg ---
-            // coreType (enum) ‚ğ•¶š—ñi"ATK", "DEF", "SPD"j‚É•ÏŠ·‚µ‚ÄUIƒ}ƒl[ƒWƒƒ[‚É‘—‚é
-            string typeStr = "";
-            switch (core.coreType)
+            Canvas mainCanvas = FindObjectOfType<Canvas>();
+            if (mainCanvas != null)
             {
-                case CoreType.Attack: typeStr = "ATK"; break;
-                case CoreType.Defense: typeStr = "DEF"; break;
-                case CoreType.Speed: typeStr = "SPD"; break;
+                // Canvasã®å­ä¾›ã¨ã—ã¦SpawnAreaã‚’ç”Ÿæˆ
+                GameObject spawnedArea = Instantiate(spawnAreaPrefab, mainCanvas.transform, false);
+                activeSpawnArea = spawnedArea.transform;
             }
-
-            // UIƒ}ƒl[ƒWƒƒ[‚É’Ê’m‚µ‚ÄAƒCƒ“ƒxƒ“ƒgƒŠ“à‚ÉƒAƒCƒRƒ“‚ğ•\¦‚³‚¹‚éI
-            if (CoreUIManager.Instance != null)
+            else
             {
-                CoreUIManager.Instance.AcquireCore(typeStr);
+                Debug.LogError("ç”»é¢ã« Canvas ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ï¼UIã‚’è¡¨ç¤ºã§ãã¾ã›ã‚“ã€‚");
+                return;
             }
-
-            // ƒRƒA‚ğÁ‹‚·‚é
-            Destroy(other.gameObject);
         }
-    }
 
-    // š‚±‚ÌƒXƒe[ƒ^ƒX‚ğã‚°‚éŠÖ”‚ÍAŒã‚Åu‘•”õƒGƒŠƒA‚Éƒhƒƒbƒv‚µ‚½uŠÔv‚ÉŒÄ‚Ño‚·‚æ‚¤‚É‚µ‚Ü‚·
-    public void ApplyCore(string type)
-    {
-        switch (type)
+        // ğŸ¯ 2. ã‚³ã‚¢UIã‚’ç”Ÿæˆã™ã‚‹
+        if (stockSlotPrefab != null && testCoreData != null)
         {
-            case "ATK":
-                attack += 1;
-                Debug.Log("‘•”õŠ®—¹IŒ»İ‚ÌUŒ‚—Í : " + attack);
-                break;
-            case "DEF":
-                defense += 1;
-                Debug.Log("‘•”õŠ®—¹IŒ»İ‚Ì–hŒä—Í : " + defense);
-                break;
-            case "SPD":
-                speed += 1f;
-                Debug.Log("‘•”õŠ®—¹IŒ»İ‚Ì‘¬“x : " + speed);
-                break;
+            // ç‹¬ç«‹ã—ãŸã‚¯ãƒ­ãƒ¼ãƒ³ã¨ã—ã¦ç”Ÿæˆï¼ˆã‚¢ã‚»ãƒƒãƒˆãƒ‡ãƒ¼ã‚¿ç ´æã‚¨ãƒ©ãƒ¼ã‚’100%å›é¿ï¼‰
+            GameObject newCore = Instantiate(stockSlotPrefab);
+            RectTransform rect = newCore.GetComponent<RectTransform>();
+
+            if (rect != null)
+            {
+                // å…ˆã»ã©ç”Ÿæˆã—ãŸã€Œã‚²ãƒ¼ãƒ ç”»é¢ä¸Šã®SpawnAreaã€ã®ä¸­ã«å®‰å…¨ã«å…¥ã‚Œã‚‹
+                if (activeSpawnArea != null)
+                {
+                    newCore.transform.SetParent(activeSpawnArea, false);
+                }
+                rect.anchoredPosition = Vector2.zero;
+            }
+
+            // è¦‹ãŸç›®ã®ã‚»ãƒƒãƒˆã‚¢ãƒƒãƒ—
+            CoreItemUI coreUI = newCore.GetComponent<CoreItemUI>();
+            if (coreUI != null)
+            {
+                coreUI.SetupShape(testCoreData);
+            }
         }
     }
 }

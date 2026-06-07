@@ -1,86 +1,73 @@
-using UnityEngine;
-using UnityEngine.UI;
+ï»¿using UnityEngine;
 
 public class CoreUIManager : MonoBehaviour
 {
-    public static CoreUIManager Instance;
+    // ğŸ’¡ ã©ã“ã‹ã‚‰ã§ã‚‚ã‚¢ã‚¯ã‚»ã‚¹ã§ãã‚‹ã‚ˆã†ã«ã™ã‚‹é­”æ³•ï¼ˆã‚·ãƒ³ã‚°ãƒ«ãƒˆãƒ³ï¼‰
+    public static CoreUIManager Instance { get; private set; }
 
-    [Header("UI‘S‘Ì‚Ìİ’è")]
-    public GameObject coreUI;
-    public Transform tempStorage; // TempStorage‚ÌRectTransform‚ğ“ü‚ê‚éêŠ
+    [Header("é–‹é–‰ã•ã›ã‚‹ã‚¤ãƒ³ãƒ™ãƒ³ãƒˆãƒªå…¨ä½“ã®è¦ª (CoreInventory)")]
+    public GameObject coreInventory;
 
-    [Header("ƒvƒŒƒnƒuİ’è")]
-    public GameObject stockSlotPrefab; // æ‚Ù‚Çì‚Á‚½ StockSlotPrefab ‚ğ“ü‚ê‚é
-
-    [Header("ƒRƒA‚ÌFİ’è")]
-    public Color atkColor = Color.red;
-    public Color defColor = Color.blue;
-    public Color spdColor = Color.yellow;
+    [Header("ãƒ‘ãƒ¼ãƒ„ã‚’ç”Ÿæˆã™ã‚‹ã‚¹ãƒˆãƒƒã‚¯ã®è¦ª (TempStorage)")]
+    public Transform tempStorage;
 
     private bool isOpen = false;
 
     void Awake()
     {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
+        // ã‚·ãƒ³ã‚°ãƒ«ãƒˆãƒ³ã®ç¢ºå®š
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     void Start()
     {
-        coreUI.SetActive(false);
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        Time.timeScale = 1;
+        // ğŸ’¡ ã‚²ãƒ¼ãƒ é–‹å§‹æ™‚ã¯ã‚¤ãƒ³ãƒ™ãƒ³ãƒˆãƒªç”»é¢ã‚’é–‰ã˜ã¦ãŠã
+        if (coreInventory != null)
+        {
+            coreInventory.SetActive(false);
+            isOpen = false;
+        }
     }
 
     void Update()
     {
+        // ğŸ’¡ Tabã‚­ãƒ¼ãŒæŠ¼ã•ã‚ŒãŸã‚‰é–‹é–‰ã‚’åˆ‡ã‚Šæ›¿ãˆã‚‹
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            ToggleCoreUI();
+            ToggleInventory();
         }
     }
 
-    void ToggleCoreUI()
+    public void ToggleInventory()
     {
+        if (coreInventory == null) return;
+
         isOpen = !isOpen;
-        coreUI.SetActive(isOpen);
-        Cursor.visible = isOpen;
-        Cursor.lockState = isOpen ? CursorLockMode.None : CursorLockMode.Locked;
-        Time.timeScale = isOpen ? 0 : 1;
-    }
+        coreInventory.SetActive(isOpen);
 
-    // ƒRƒA‚ğE‚Á‚½‚ÉŒÄ‚Î‚ê‚éŠÖ”i‰½ŒÂ‚Å‚àV‚µ‚­¶¬‚·‚éj
-    public void AcquireCore(string type)
-    {
-        Debug.Log(type + " ƒRƒA‚ğ“üèIV‚µ‚¢ƒXƒgƒbƒNƒ}ƒX‚ğ¶¬‚µ‚Ü‚·B");
-
-        if (stockSlotPrefab == null || tempStorage == null)
+        if (isOpen)
         {
-            Debug.LogError("UIManager‚ÌƒCƒ“ƒXƒyƒNƒ^[İ’è‚ª•s‘«‚µ‚Ä‚¢‚Ü‚·I");
-            return;
+            // ğŸ’¡ UIã‚’é–‹ã„ãŸç¬é–“ã€ã‚²ãƒ¼ãƒ ã®æ™‚é–“ã‚’å®Œå…¨ã«æ­¢ã‚ã‚‹ï¼
+            Time.timeScale = 0f;
+
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
-
-        // 1. ƒvƒŒƒnƒu‚©‚çV‚µ‚­ƒ}ƒXiƒXƒƒbƒgj‚ğ¶¬‚µATempStorage‚Ìq‹Ÿ‚É‚·‚é
-        GameObject newSlot = Instantiate(stockSlotPrefab, tempStorage);
-        newSlot.name = type + "_StockSlot";
-
-        // 2. ‚»‚Ìƒ}ƒX‚ÌF‚ğAE‚Á‚½ƒRƒA‚Ìí—Ş‚É‡‚í‚¹‚Ä“h‚è‘Ö‚¦‚é
-        Image slotImage = newSlot.GetComponent<Image>();
-        if (slotImage != null)
+        else
         {
-            switch (type)
-            {
-                case "ATK": slotImage.color = atkColor; break;
-                case "DEF": slotImage.color = defColor; break;
-                case "SPD": slotImage.color = spdColor; break;
-            }
+            // ğŸ’¡ UIã‚’é–‰ã˜ãŸã‚‰ã€ã‚²ãƒ¼ãƒ ã®æ™‚é–“ã‚’1å€ï¼ˆé€šå¸¸é€šã‚Šï¼‰ã«æˆ»ã™ï¼
+            Time.timeScale = 1f;
+
+            // å¿…è¦ã«å¿œã˜ã¦ã‚«ãƒ¼ã‚½ãƒ«ã‚’ãƒ­ãƒƒã‚¯ã™ã‚‹ç­‰ã®å‡¦ç†
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
-
-        // 3. Œ³XSlot‚É•t‚¢‚Ä‚¢‚éuCoreSlotv‚È‚Ç‚ÌƒXƒNƒŠƒvƒg‚ªŒëì“®‚µ‚È‚¢‚æ‚¤’²®
-        // i•K—v‚É‰‚¶‚ÄAƒhƒ‰ƒbƒO‰Â”\‚ÈƒRƒ“ƒ|[ƒlƒ“ƒg‚ğ‚±‚±‚Å§Œä‚Å‚«‚Ü‚·j
-
-        // ©“®‚ÅƒCƒ“ƒxƒ“ƒgƒŠ‰æ–Ê‚ğŠJ‚­
-        if (!isOpen) ToggleCoreUI();
     }
 }

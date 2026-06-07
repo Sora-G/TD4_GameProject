@@ -248,9 +248,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b137e9e5cedd5c84096ec36ee3cb092b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCore
-  attack: 1
-  defense: 1
-  speed: 5
+  stockSlotPrefab: {fileID: 8803230071512006044, guid: 699f3abae67ba9b4ab797e8f52a7e0a0, type: 3}
+  spawnAreaPrefab: {fileID: 1483111026296892533, guid: 214bd09d2837fda4c86102b28447cc7f, type: 3}
+  testCoreData: {fileID: 0}
 --- !u!114 &3661985686086980262
 MonoBehaviour:
   m_ObjectHideFlags: 0

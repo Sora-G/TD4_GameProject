@@ -1,39 +1,26 @@
-using UnityEngine;
-using UnityEngine.EventSystems;
+ï»¿using UnityEngine;
+using UnityEngine.UI;
 
-public class CoreSlot : MonoBehaviour, IDropHandler
+public class CoreSlot : MonoBehaviour
 {
-    // ‚±‚ÌƒXƒƒbƒg‚Ìã‚É‘¼‚ÌUI‚ªƒhƒƒbƒv‚³‚ê‚½
-    public void OnDrop(PointerEventData eventData)
+    public int x;
+    public int y;
+    public bool isOccupied = false; // ğŸ’¡ ã“ã®ãƒã‚¹ã«ãƒ‘ãƒ¼ãƒ„ãŒç½®ã‹ã‚Œã¦ã„ã‚‹ã‹
+    public CoreItemUI placedItem = null; // ğŸ’¡ ç½®ã‹ã‚Œã¦ã„ã‚‹ãƒ‘ãƒ¼ãƒ„ã®ãƒ‡ãƒ¼ã‚¿
+
+    private Image myImage;
+
+    void Awake()
     {
-        Debug.Log(gameObject.name + " ‚Éƒhƒƒbƒv‚³‚ê‚Ü‚µ‚½");
+        myImage = GetComponent<Image>();
+    }
 
-        // ƒhƒ‰ƒbƒO‚³‚ê‚Ä‚«‚½ƒIƒuƒWƒFƒNƒg‚Ì CoreDrag ƒXƒNƒŠƒvƒg‚ğæ“¾
-        CoreDrag dragObject = eventData.pointerDrag.GetComponent<CoreDrag>();
-
-        if (dragObject != null)
+    // ğŸ’¡ ãƒã‚¹ã®è¦‹ãŸç›®ï¼ˆãƒ‡ãƒãƒƒã‚°ç”¨ãªã©ã«è‰²ã‚’å¤‰ãˆã‚‰ã‚Œã‚‹ã‚ˆã†ã«ã—ã¦ãŠãï¼‰
+    public void SetHighlight(bool highlight, Color color)
+    {
+        if (myImage != null && !isOccupied)
         {
-            // ƒpƒ^[ƒ“A: ƒXƒƒbƒg‚ª‹ó‚Ìê‡i‚»‚Ì‚Ü‚Ü’†‚É“ü‚ê‚éj
-            if (transform.childCount == 0)
-            {
-                dragObject.parentReturnTo = this.transform;
-            }
-            // ƒpƒ^[ƒ“B: ‚·‚Å‚É’†‚É•Ê‚ÌƒRƒA‚ª‚¢‚éê‡iˆÊ’u‚ğ“ü‚ê‘Ö‚¦‚éIj
-            else
-            {
-                // ¡‚±‚ÌƒXƒƒbƒg‚É‚¢‚éŠù‘¶‚ÌƒRƒAiq—v‘fj‚ğæ“¾
-                Transform existingCore = transform.GetChild(0);
-
-                // ƒhƒ‰ƒbƒOŒ³iŒ³XƒRƒA‚ª’u‚¢‚Ä‚ ‚Á‚½êŠA‚ ‚é‚¢‚ÍTempStoragej‚Ìî•ñ‚ğæ“¾
-                Transform previousSlot = dragObject.parentReturnTo;
-
-                // Šù‘¶‚ÌƒRƒA‚ğAƒhƒ‰ƒbƒOŒ³‚ÌƒXƒƒbƒg‚Éˆø‚Á‰z‚µ‚³‚¹‚é
-                existingCore.SetParent(previousSlot);
-                existingCore.localPosition = Vector3.zero; // ˆÊ’uƒŠƒZƒbƒg
-
-                // ƒhƒ‰ƒbƒO‚µ‚Ä‚«‚½ƒRƒA‚Ì‹A‚è“¹‚ğA‚±‚ÌƒXƒƒbƒg‚É•ÏX‚·‚é
-                dragObject.parentReturnTo = this.transform;
-            }
+            myImage.color = highlight ? color : new Color(1, 1, 1, 0.1f); // é€šå¸¸æ™‚ã¯ã†ã£ã™ã‚‰ç™½ã„åŠé€æ˜
         }
     }
 }
