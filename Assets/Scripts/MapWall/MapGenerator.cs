@@ -55,6 +55,8 @@ public class MapGenerator : MonoBehaviour
 
     void Start()
     {
+        currentStageType = StageDataCarrier.SelectedStageType;
+
         GenerateMap();
     }
 

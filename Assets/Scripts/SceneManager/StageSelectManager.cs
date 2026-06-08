@@ -12,10 +12,36 @@ public class StageSelectManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.anyKeyDown)
+        // 1キー → 正方形を選んでゲーム開始
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            SceneManager.LoadScene("GameScene");
-            Debug.Log("ゲームシーンに移動");
+            SelectStageAndLoad(StageType.Square);
         }
+        // 2キー → 長方形を選んでゲーム開始
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            SelectStageAndLoad(StageType.Rectangle);
+        }
+        // 3キー → 円形を選んでゲーム開始
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            SelectStageAndLoad(StageType.Circle);
+        }
+
+        //if(Input.anyKeyDown)
+        //{
+        //    SceneManager.LoadScene("GameScene");
+        //    Debug.Log("ゲームシーンに移動");
+        //}
+    }
+
+    private void SelectStageAndLoad(StageType type)
+    {
+        // 選択したステージタイプを保持
+        StageDataCarrier.SelectedStageType = type;
+
+        // シーン遷移
+        SceneManager.LoadScene("GameScene");
+        Debug.Log($"{type} ステージを選択。ゲームシーンに移動します。");
     }
 }

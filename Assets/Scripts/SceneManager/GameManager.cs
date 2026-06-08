@@ -56,9 +56,9 @@ public class GameManager : MonoBehaviour
         isGameOver = true;
         Debug.Log("You Lose...");
 
-        if (gameClearManager != null)
+        if (gameOverManager != null)
         {
-            gameClearManager.ChangeGameClear();
+            gameOverManager.ChangeGameOver();
         }
         else
         {
