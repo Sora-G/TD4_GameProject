@@ -376,12 +376,24 @@ public class MapGenerator : MonoBehaviour
                 break;
             }
 
-            Instantiate(
+            GameObject spawndEnemy = Instantiate(
                 Enemy,
                 enemyPos,
                 Quaternion.identity,
                 transform
             );
+
+            EnemyStatus enemyStatus = spawndEnemy.GetComponent<EnemyStatus>();
+            if (enemyStatus != null)
+            {
+                System.Array enemyTypes = System.Enum.GetValues(typeof(EnemyStatus.EnemyType));
+                EnemyStatus.EnemyType randomType =
+                    (EnemyStatus.EnemyType)enemyTypes.GetValue(
+                        Random.Range(0, enemyTypes.Length)
+                    );
+                enemyStatus.currentType = randomType;
+                enemyStatus.SetStaus(randomType);
+            }
         }
     }
 

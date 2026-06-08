@@ -69,6 +69,20 @@ public class BulletController : MonoBehaviour
             //Debug.Log("Enemyの弾がPlayerに当たった");
             Destroy(gameObject);//弾を消す
         }
+        else if (other.CompareTag("BreakWall"))
+        {
+            // 当たった壁から BreakWall コンポーネントを取得
+            BreakWall wall = other.GetComponent<BreakWall>();
+
+            if (wall != null)
+            {
+                // 壁のDamage関数を呼び出す（今回は1ダメージとします）
+                wall.Damage(1);
+            }
+
+            // 弾を消す
+            Destroy(gameObject);
+        }
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

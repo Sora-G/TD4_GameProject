@@ -30,7 +30,7 @@ public class EnemyStatus : MonoBehaviour
     public Status currentStatus;//敵のステータスを管理する変数
 
     //敵の種類に応じてステータスを設定する関数
-    void SetStaus(EnemyType type) 
+    public void SetStaus(EnemyType type) 
     {
         switch (type) { 
             case EnemyType.Normal://通常の敵のステータスを設定

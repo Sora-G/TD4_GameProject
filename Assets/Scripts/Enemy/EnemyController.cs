@@ -30,7 +30,23 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switch(currentState) {
+        if (transform.position.y <= -450f)
+        {
+            if (enemyStatus != null)
+            {
+                // EnemyStatusのDie()を呼ぶことで、GameManagerの残数カウントも綺麗に減らせます
+                enemyStatus.Die();
+                return; // 死亡してDestroyされるので、これ以降の処理はスキップ
+            }
+            else
+            {
+                // 万が一EnemyStatusがない場合の安全策
+                Destroy(gameObject);
+                return;
+            }
+        }
+
+        switch (currentState) {
             case EnemyState.Serch:
                 // プレイヤーを探す処理
                 enemySerch.Patrol();// プレイヤーを探す処理を呼び出す
