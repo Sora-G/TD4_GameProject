@@ -5,7 +5,14 @@ public class GameOverManager : MonoBehaviour
 {
     public void ChangeGameOver()
     {
-        SceneManager.LoadScene("GameOverScene");
+        if (FadeManager.Instance != null)
+        {
+            FadeManager.Instance.LoadSceneWithFade("GameOverScene");
+        }
+        else
+        {
+            SceneManager.LoadScene("GameOverScene");
+        }
         Debug.Log("ゲームオーバーシーンに移動");
     }
 
@@ -28,7 +35,14 @@ public class GameOverManager : MonoBehaviour
             if (currentSceneName == "GameOverScene")
             {
                 //タイトルシーンに移動
-                SceneManager.LoadScene("TitleScene");
+                if (FadeManager.Instance != null)
+                {
+                    FadeManager.Instance.LoadSceneWithFade("TitleScene");
+                }
+                else
+                {
+                    SceneManager.LoadScene("TitleScene");
+                }
                 Debug.Log("タイトルシーンに移動");
             }
         }

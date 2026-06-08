@@ -32,6 +32,14 @@ public class EnemySerch : MonoBehaviour
     //巡回する処理
     public void Patrol()
     {
+        if (enemyStatus == null || rb == null)
+        {
+            // Startで取得し損ねていた場合のために、ここで再取得を試みる
+            if (enemyStatus == null) enemyStatus = GetComponent<EnemyStatus>();
+            if (rb == null) rb = GetComponent<Rigidbody>();
+
+            return; // 準備ができるまでこのフレームの巡回はやめる
+        }
 
         // 前方にRayを飛ばす
         Ray ray = new Ray(
@@ -95,6 +103,15 @@ public class EnemySerch : MonoBehaviour
     //プレイヤーを発見する処理
     public bool DetectPlayer()
     {
+        //プレイヤーがいない場合は、再度検索する   
+        if (player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
+
+            // 再検索してもやっぱり居ない場合は、エラーにせず処理をスキップする
+            if (player == null) return false;
+        }
+
         //プレイヤーとの距離を計算
         float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
 

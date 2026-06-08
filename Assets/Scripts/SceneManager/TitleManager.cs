@@ -14,7 +14,14 @@ public class TitleManager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            SceneManager.LoadScene("StageSelectScene");
+            if (FadeManager.Instance != null)
+            {
+                FadeManager.Instance.LoadSceneWithFade("StageSelectScene");
+            }
+            else
+            {
+                SceneManager.LoadScene("StageSelectScene");
+            }
             Debug.Log("ステージセレクトシーンに移動");
         }
     }

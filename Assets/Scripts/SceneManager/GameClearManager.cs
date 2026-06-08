@@ -5,7 +5,14 @@ public class GameClearManager : MonoBehaviour
 {
     public void ChangeGameClear()
     {
-        SceneManager.LoadScene("GameClearScene");
+        if (FadeManager.Instance != null)
+        {
+            FadeManager.Instance.LoadSceneWithFade("GameClearScene");
+        }
+        else
+        {
+            SceneManager.LoadScene("GameClearScene");
+        }
         Debug.Log("ゲームクリアシーンに移動");
     }
 
@@ -28,7 +35,14 @@ public class GameClearManager : MonoBehaviour
             if (currentSceneName == "GameClearScene")
             {
                 //タイトルシーンに移動
-                SceneManager.LoadScene("TitleScene");
+                if (FadeManager.Instance != null)
+                {
+                    FadeManager.Instance.LoadSceneWithFade("TitleScene");
+                }
+                else
+                {
+                    SceneManager.LoadScene("TitleScene");
+                }
                 Debug.Log("タイトルシーンに移動");
             }
         }

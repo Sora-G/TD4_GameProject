@@ -2139,6 +2139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &14736218
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6706,6 +6707,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &52902547
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7725,6 +7727,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &66029230
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8159,6 +8162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &68081623
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9277,6 +9281,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &79885753
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13588,6 +13593,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &112100370
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15029,6 +15035,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &122132436
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -22727,6 +22734,124 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 175502263}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &175785597
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 175785602}
+  - component: {fileID: 175785601}
+  - component: {fileID: 175785600}
+  - component: {fileID: 175785599}
+  - component: {fileID: 175785598}
+  m_Layer: 5
+  m_Name: FadeCanvas
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &175785598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 175785597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7438e36a5d13fba4993bb9de75baa104, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FadeManager
+  fadeImage: {fileID: 1821435231}
+  fadeTime: 0.5
+--- !u!114 &175785599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 175785597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GraphicRaycaster
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &175785600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 175785597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
+  m_UiScaleMode: 1
+  m_ReferencePixelsPerUnit: 100
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 800, y: 600}
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0
+  m_PhysicalUnit: 3
+  m_FallbackScreenDPI: 96
+  m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 1
+  m_PresetInfoIsWorld: 0
+--- !u!223 &175785601
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 175785597}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 0
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
+  m_UseReflectionProbes: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 999
+  m_TargetDisplay: 0
+--- !u!224 &175785602
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 175785597}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1821435233}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
 --- !u!1 &179380365
 GameObject:
   m_ObjectHideFlags: 0
@@ -23527,6 +23652,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &184483331
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23691,6 +23817,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &186054646
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -24935,6 +25062,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &195145896
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -27794,6 +27922,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &216143337
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -28363,6 +28492,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &221912071
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -29661,6 +29791,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &232500200
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -30333,6 +30464,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &236248603
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -32183,6 +32315,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &252186747
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -32976,6 +33109,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &254940506
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -33351,6 +33485,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &256847603
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -36878,6 +37013,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &285303101
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -39464,6 +39600,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &299187517
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -39660,6 +39797,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &302431254
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -40778,6 +40916,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &315394332
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -41205,6 +41344,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &317576603
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -50801,6 +50941,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &394801619
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -58395,6 +58536,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &439647877
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -66626,6 +66768,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &495218249
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -66790,6 +66933,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &495701264
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -74239,6 +74383,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &562103110
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -74808,6 +74953,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &565008998
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -78571,6 +78717,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &591019848
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -80150,6 +80297,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &605221018
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -83465,6 +83613,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &636123617
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -84439,6 +84588,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &642137460
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -89981,6 +90131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &685583280
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -90961,6 +91112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &697849262
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -91665,6 +91817,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &702340757
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -100397,6 +100550,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &775460431
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -104909,6 +105063,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &819067736
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -108625,6 +108780,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &857653235
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -114970,6 +115126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &903413863
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -120090,6 +120247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &948082677
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -127124,6 +127282,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &998150346
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -127288,6 +127447,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &998887091
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -129663,6 +129823,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &1021888234
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -131828,6 +131989,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &1039019814
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -138252,6 +138414,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &1082061359
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -139933,6 +140096,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &1094979166
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -141604,6 +141768,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &1108296035
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -142376,6 +142541,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &1113222763
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -146120,6 +146286,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &1144740876
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -147150,6 +147317,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &1152055503
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -159191,6 +159359,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &1233376482
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -160165,6 +160334,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &1241978171
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -165221,6 +165391,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &1282001560
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -174217,6 +174388,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &1338620584
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -177051,6 +177223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &1361695688
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -177350,6 +177523,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &1362411695
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -179397,6 +179571,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &1379316624
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -181231,6 +181406,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &1392996538
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -190407,6 +190583,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &1448900208
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -191951,6 +192128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &1460994602
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -193092,6 +193270,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &1468012208
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -196720,6 +196899,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &1494823888
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -202478,6 +202658,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &1530145789
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -207186,6 +207367,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &1565730873
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -207478,6 +207660,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &1572011654
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -212992,6 +213175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &1614170783
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -217704,6 +217888,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &1659327481
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -221451,6 +221636,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &1685149496
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -223817,6 +224003,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &1705694258
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -228065,6 +228252,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &1758257460
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -235655,6 +235843,81 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1820938781}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1821435230
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1821435233}
+  - component: {fileID: 1821435232}
+  - component: {fileID: 1821435231}
+  m_Layer: 5
+  m_Name: FadeImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1821435231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1821435230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1821435232
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1821435230}
+  m_CullTransparentMesh: 1
+--- !u!224 &1821435233
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1821435230}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 175785602}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1821671870
 GameObject:
   m_ObjectHideFlags: 0
@@ -237868,6 +238131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &1848096906
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -240531,6 +240795,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &1860395995
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -243731,6 +243996,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &1885927903
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -243895,6 +244161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &1887895337
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -245267,6 +245534,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &1895355422
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -248220,6 +248488,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &1915166587
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -253322,6 +253591,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &1951690011
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -256317,6 +256587,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &1976822127
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -272480,6 +272751,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &2098473124
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -273634,6 +273906,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &2110885202
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -275808,6 +276081,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &2129675428
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -277297,6 +277571,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageFloor
   damage: 1
+  damageInterval: 1
 --- !u!65 &2139059496
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -278635,3 +278910,4 @@ SceneRoots:
   - {fileID: 2133966640}
   - {fileID: 107465578}
   - {fileID: 1150271294}
+  - {fileID: 175785602}

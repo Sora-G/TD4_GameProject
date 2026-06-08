@@ -41,7 +41,16 @@ public class StageSelectManager : MonoBehaviour
         StageDataCarrier.SelectedStageType = type;
 
         // シーン遷移
-        SceneManager.LoadScene("GameScene");
+        
+
+        if(FadeManager.Instance != null)
+        {
+            FadeManager.Instance.LoadSceneWithFade("GameScene");
+        }
+        else
+        {
+            SceneManager.LoadScene("GameScene");
+        }
         Debug.Log($"{type} ステージを選択。ゲームシーンに移動します。");
     }
 }
