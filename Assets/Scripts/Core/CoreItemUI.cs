@@ -3,14 +3,25 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
+[RequireComponent(typeof(RectTransform))]
 public class CoreItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     [Header("このパーツの形状データ")]
-    public CoreData coreData;
+    [SerializeField] private CoreData _coreData;
+    public CoreData coreData
+    {
+        get => _coreData;
+        set
+        {
+            _coreData = value;
+            if (_coreData != null) SetupShape(_coreData);
+        }
+    }
 
     private CanvasGroup canvasGroup;
     private Transform originalParent;
     private RectTransform rectTransform;
+    private LayoutElement layoutElement;
 
     void Awake()
     {
@@ -19,17 +30,17 @@ public class CoreItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
 
     void Start()
     {
-        if (coreData != null) SetupShape(coreData);
+        if (_coreData != null) SetupShape(_coreData);
+    }
+
+    void OnEnable()
+    {
+        if (_coreData != null) SetupShape(_coreData);
     }
 
     private void EnsureComponents()
     {
-        // 🎯【超安全化】GetComponentでエラーが出ないよう、安全に取得を試みる
         if (rectTransform == null) rectTransform = GetComponent<RectTransform>();
-
-        // 💡 RectTransformが無い＝UIではない（3DのCubeなど）場合は、
-        // UI用のコンポーネントを追加しようとせず、ここで安全に処理を終了させる（エラーを回避）
-        if (rectTransform == null) return;
 
         if (canvasGroup == null)
         {
@@ -37,41 +48,95 @@ public class CoreItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
             if (canvasGroup == null) canvasGroup = gameObject.AddComponent<CanvasGroup>();
         }
 
+        if (layoutElement == null)
+        {
+            layoutElement = GetComponent<LayoutElement>();
+            if (layoutElement == null) layoutElement = gameObject.AddComponent<LayoutElement>();
+        }
+
         Image existingImage = GetComponent<Image>();
         if (existingImage != null)
         {
             existingImage.enabled = true;
             existingImage.raycastTarget = true;
-            existingImage.color = new Color(0, 0, 0, 0);
+            existingImage.color = new Color(0, 0, 0, 0); // 土台自体は完全に透明にする
         }
     }
 
     public void SetupShape(CoreData data)
     {
         EnsureComponents();
-        coreData = data;
+        _coreData = data;
 
-        foreach (Transform child in transform) Destroy(child.gameObject);
+        // 古いマスを非表示にして安全に削除
+        for (int i = transform.childCount - 1; i >= 0; i--)
+        {
+            GameObject child = transform.GetChild(i).gameObject;
+            child.SetActive(false);
+            child.name = "Destroying";
+            Destroy(child);
+        }
 
-        // 3Dオブジェクトの元の見た目を消す
-        MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
-        if (meshRenderer != null) meshRenderer.enabled = false;
+        if (data == null || data.shapePattern == null || data.shapePattern.Length < 16) return;
 
+        // 🎯 システム上の1マスの基本サイズは「70f」として計算する
         float cellSize = 70f;
 
-        if (rectTransform != null)
+        int minRow = 4, maxRow = -1, minCol = 4, maxCol = -1;
+        bool hasPattern = false;
+
+        for (int index = 0; index < 16; index++)
         {
-            rectTransform.sizeDelta = new Vector2(cellSize * 4, cellSize * 4);
-        }
-        else
-        {
-            // 🎯 UIじゃない場合はこれ以降のUI生成処理（Imageの追加など）を行わない
-            return;
+            if (data.shapePattern[index])
+            {
+                int row = index / 4;
+                int col = index % 4;
+
+                if (row < minRow) minRow = row;
+                if (row > maxRow) maxRow = row;
+                if (col < minCol) minCol = col;
+                if (col > maxCol) maxCol = col;
+                hasPattern = true;
+            }
         }
 
-        for (int row = 0; row < 4; row++)
+        if (!hasPattern) return;
+
+        int widthBlocks = (maxCol - minCol) + 1;
+        int heightBlocks = (maxRow - minRow) + 1;
+
+        // 🎯 実際のサイズを計算（2マスなら 70 * 2 = 140）
+        float totalWidth = widthBlocks * cellSize;
+        float totalHeight = heightBlocks * cellSize;
+
+        // 🎯【超重要】親のGridLayoutGroupによるサイズ強制上書きを「無視」させる設定
+        if (layoutElement != null)
         {
-            for (int col = 0; col < 4; col++)
+            // これらを true にすることで、親の自動整列に殺されず、140x140 が維持されます
+            layoutElement.ignoreLayout = false;
+            layoutElement.minWidth = totalWidth;
+            layoutElement.minHeight = totalHeight;
+            layoutElement.preferredWidth = totalWidth;
+            layoutElement.preferredHeight = totalHeight;
+        }
+
+        // 🎯 スケールは変な挙動（ドラッグ時のズレなど）を防ぐために「1」に正しく戻します
+        if (rectTransform != null)
+        {
+            rectTransform.localScale = Vector3.one;
+            rectTransform.anchorMin = new Vector2(0, 1);
+            rectTransform.anchorMax = new Vector2(0, 1);
+            rectTransform.pivot = new Vector2(0, 1);
+            rectTransform.sizeDelta = new Vector2(totalWidth, totalHeight); // ここで140x140に確定
+        }
+
+        // 🎯 見た目だけを半分（35ピクセル相当）にするための描画用cellSize
+        float visualCellSize = cellSize * 0.5f; // = 35f
+
+        // 有効な範囲内でループを回して中身（赤いグラフィック）を生成
+        for (int row = minRow; row <= maxRow; row++)
+        {
+            for (int col = minCol; col <= maxCol; col++)
             {
                 int index = row * 4 + col;
                 if (data.shapePattern[index])
@@ -82,53 +147,71 @@ public class CoreItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
                     RectTransform segRect = segment.GetComponent<RectTransform>();
                     if (segRect != null)
                     {
-                        segRect.sizeDelta = new Vector2(cellSize, cellSize);
-                        segRect.pivot = new Vector2(0, 1);
                         segRect.anchorMin = new Vector2(0, 1);
                         segRect.anchorMax = new Vector2(0, 1);
-                        segRect.anchoredPosition = new Vector2(col * cellSize, -row * cellSize);
+                        segRect.pivot = new Vector2(0, 1);
+
+                        // 🎯 赤いマスの見た目のサイズ自体を半分にする（35x35にする）
+                        segRect.sizeDelta = new Vector2(visualCellSize, visualCellSize);
+
+                        // 🎯 配置する座標の計算も半分（35ピクセル間隔）にする
+                        float posX = (col - minCol) * visualCellSize;
+                        float posY = -(row - minRow) * visualCellSize;
+                        segRect.anchoredPosition = new Vector2(posX, posY);
                     }
 
                     Image segImage = segment.GetComponent<Image>();
                     if (segImage != null)
                     {
-                        segImage.color = data.coreColor;
-                        segImage.raycastTarget = false;
+                        Color solidColor = data.coreColor;
+                        solidColor.a = 1f;
+                        segImage.color = solidColor;
+                        segImage.raycastTarget = true;
                     }
 
-                    Outline outline = segment.AddComponent<Outline>();
-                    outline.effectColor = new Color(0f, 0f, 0f, 0.4f);
-                    outline.effectDistance = new Vector2(1f, 1f);
+                    DragRelay relay = segment.AddComponent<DragRelay>();
+                    relay.targetDragHandler = this;
                 }
             }
         }
+
+        Canvas.ForceUpdateCanvases();
+        if (transform.parent != null)
+        {
+            LayoutRebuilder.ForceRebuildLayoutImmediate(transform.parent.GetComponent<RectTransform>());
+        }
+        LayoutRebuilder.ForceRebuildLayoutImmediate(rectTransform);
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (rectTransform == null) return; // 3Dオブジェクトならドラッグさせない
-
-        originalParent = transform.parent;
-        Canvas mainCanvas = GetComponentInParent<Canvas>();
-        if (mainCanvas != null) transform.SetParent(mainCanvas.transform);
+        if (CoreBox.Instance != null)
+        {
+            CoreBox.Instance.ClearItemFromGrid(this);
+        }
 
         if (canvasGroup != null)
         {
             canvasGroup.alpha = 0.6f;
             canvasGroup.blocksRaycasts = false;
         }
+
+        originalParent = transform.parent;
+
+        Canvas mainCanvas = GetComponentInParent<Canvas>();
+        if (mainCanvas != null)
+        {
+            transform.SetParent(mainCanvas.transform);
+        }
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (rectTransform == null) return;
         transform.position = Input.mousePosition;
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (rectTransform == null) return;
-
         if (canvasGroup != null)
         {
             canvasGroup.alpha = 1f;
@@ -155,15 +238,38 @@ public class CoreItemUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDr
             if (CoreBox.Instance.TryPlaceItem(this, targetSlot.x, targetSlot.y))
             {
                 transform.SetParent(targetSlot.transform);
-                rectTransform.anchorMin = new Vector2(0, 1);
-                rectTransform.anchorMax = new Vector2(0, 1);
-                rectTransform.pivot = new Vector2(0, 1);
-                rectTransform.anchoredPosition = Vector2.zero;
+                if (rectTransform != null)
+                {
+                    rectTransform.anchorMin = new Vector2(0, 1);
+                    rectTransform.anchorMax = new Vector2(0, 1);
+                    rectTransform.pivot = new Vector2(0, 1);
+                    rectTransform.anchoredPosition = Vector2.zero;
+                }
                 return;
             }
         }
 
         transform.SetParent(originalParent);
-        rectTransform.anchoredPosition = Vector2.zero;
+        if (rectTransform != null) rectTransform.anchoredPosition = Vector2.zero;
+    }
+}
+
+public class DragRelay : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+{
+    public CoreItemUI targetDragHandler;
+
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        if (targetDragHandler != null) targetDragHandler.OnBeginDrag(eventData);
+    }
+
+    public void OnDrag(PointerEventData eventData)
+    {
+        if (targetDragHandler != null) targetDragHandler.OnDrag(eventData);
+    }
+
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        if (targetDragHandler != null) targetDragHandler.OnEndDrag(eventData);
     }
 }

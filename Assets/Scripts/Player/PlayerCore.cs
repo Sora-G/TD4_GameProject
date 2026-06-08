@@ -2,60 +2,80 @@
 
 public class PlayerCore : MonoBehaviour
 {
-    [Header("生成するUIパーツのプレハブ")]
+    [Header("コアを拾った時にインベントリに生成する【UIプレハブ】")]
     public GameObject stockSlotPrefab;
 
-    [Header("SpawnAreaのプレハブ (ここにProjectのプレハブを置いてOK)")]
-    public GameObject spawnAreaPrefab;
+    [Header("インベントリ内のコア出現場所 (空欄のままで自動取得されます)")]
+    public Transform spawnAreaTransform;
 
-    [Header("テスト用のコアデータ")]
-    public CoreData testCoreData;
+    [Header("インベントリ画面の大元パネル (空欄のままで自動取得されます)")]
+    public GameObject inventoryPanel;
 
-    // 内部で実際に使う実体（クローン）用の変数
-    private Transform activeSpawnArea;
-
-    void Start()
+    private void Start()
     {
-        // 🎯 1. もしSpawnAreaのプレハブが設定されていたら、画面上（Canvas）に実体化する
-        if (spawnAreaPrefab != null)
+        // 🎯【非アクティブ対策】まずシーン上で必ず起きている大元の「Canvas」を探す
+        Canvas mainCanvas = FindObjectOfType<Canvas>();
+
+        if (mainCanvas != null)
         {
-            Canvas mainCanvas = FindObjectOfType<Canvas>();
-            if (mainCanvas != null)
+            // Canvasの子供から、非アクティブ（消えている）オブジェクトも含めて根こそぎ名前で探す
+            Transform[] allChildren = mainCanvas.GetComponentsInChildren<Transform>(true);
+
+            foreach (Transform child in allChildren)
             {
-                // Canvasの子供としてSpawnAreaを生成
-                GameObject spawnedArea = Instantiate(spawnAreaPrefab, mainCanvas.transform, false);
-                activeSpawnArea = spawnedArea.transform;
-            }
-            else
-            {
-                Debug.LogError("画面に Canvas が見つかりません！UIを表示できません。");
-                return;
+                if (child.name == "SpawnArea")
+                {
+                    spawnAreaTransform = child;
+                }
+                else if (child.name == "CoreInventory")
+                {
+                    inventoryPanel = child.gameObject;
+                }
             }
         }
 
-        // 🎯 2. コアUIを生成する
-        if (stockSlotPrefab != null && testCoreData != null)
+        // 🔍 最終確認用のログ
+        if (spawnAreaTransform == null) Debug.LogError("【エラー】'SpawnArea' がCanvas内に見つかりません！");
+        if (inventoryPanel == null) Debug.LogError("【エラー】'CoreInventory' がCanvas内に見つかりません！");
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("CoreItem"))
         {
-            // 独立したクローンとして生成（アセットデータ破損エラーを100%回避）
-            GameObject newCore = Instantiate(stockSlotPrefab);
-            RectTransform rect = newCore.GetComponent<RectTransform>();
+            CoreItemObject coreItemObj = other.GetComponent<CoreItemObject>();
+            if (coreItemObj == null || coreItemObj.coreData == null) return;
 
-            if (rect != null)
+            CoreData pickedData = coreItemObj.coreData;
+            Debug.Log($"本物のコア【{pickedData.coreName}】を検知しました！");
+
+            if (stockSlotPrefab != null && spawnAreaTransform != null)
             {
-                // 先ほど生成した「ゲーム画面上のSpawnArea」の中に安全に入れる
-                if (activeSpawnArea != null)
+                // 最初からシーン上の本物の SpawnArea を親にして等倍で安全に生成
+                GameObject newCoreUI = Instantiate(stockSlotPrefab, spawnAreaTransform, false);
+
+                // 🎯 インベントリ画面が閉じているなら、生成したコアも非表示にする
+                if (inventoryPanel != null && !inventoryPanel.activeSelf)
                 {
-                    newCore.transform.SetParent(activeSpawnArea, false);
+                    newCoreUI.SetActive(false);
                 }
-                rect.anchoredPosition = Vector2.zero;
+
+                RectTransform rect = newCoreUI.GetComponent<RectTransform>();
+                if (rect != null)
+                {
+                    rect.transform.SetParent(spawnAreaTransform, false); // 親をSpawnAreaにする
+                    rect.localScale = Vector3.one;                      // 大きさを等倍にする
+                    rect.anchoredPosition = Vector2.zero;               // 🎯【超重要】位置を親のど真ん中に強制リセット！
+                }
+
+                CoreItemUI coreUI = newCoreUI.GetComponent<CoreItemUI>();
+                if (coreUI != null)
+                {
+                    coreUI.SetupShape(pickedData);
+                }
             }
 
-            // 見た目のセットアップ
-            CoreItemUI coreUI = newCore.GetComponent<CoreItemUI>();
-            if (coreUI != null)
-            {
-                coreUI.SetupShape(testCoreData);
-            }
+            Destroy(other.gameObject);
         }
     }
 }

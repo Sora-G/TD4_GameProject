@@ -15,7 +15,14 @@ public class CoreBox : MonoBehaviour
 
     void Awake()
     {
-        Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     void Start()
@@ -35,7 +42,6 @@ public class CoreBox : MonoBehaviour
         {
             for (int x = 0; x < gridWidth; x++)
             {
-                // マス目UIを生成してCoreBoxの子要素にする
                 GameObject slotObj = Instantiate(slotPrefab, transform);
                 slotObj.name = $"Slot_{x}_{y}";
 
@@ -53,8 +59,10 @@ public class CoreBox : MonoBehaviour
     }
 
     // 💡 パーツが設置可能かチェックして配置する関数
+    // 💡 パーツが設置可能かチェックして配置する関数（ズレ・消滅防止版）
     public bool TryPlaceItem(CoreItemUI item, int startX, int startY)
     {
+        if (item == null || item.coreData == null) return false;
         CoreData data = item.coreData;
 
         // 【ループ1】置けるかどうかの事前チェック
@@ -72,12 +80,18 @@ public class CoreBox : MonoBehaviour
                     if (targetX >= gridWidth || targetY >= gridHeight || targetX < 0 || targetY < 0) return false;
 
                     // すでに他のパーツに埋められていないかチェック
-                    if (gridSlots[targetX, targetY].isOccupied) return false;
+                    if (gridSlots[targetX, targetY].isOccupied && gridSlots[targetX, targetY].placedItem != item)
+                    {
+                        return false;
+                    }
                 }
             }
         }
 
-        // 【ループ2】チェック合格！実際に配置してマスを埋める
+        // 🔥 配置を確定する前に、このアイテムが「以前いた古い場所」のデータをすべて消去してお掃除する！
+        ClearItemFromGrid(item);
+
+        // 【ループ2】実際に新しい場所に配置してデータを埋める
         for (int row = 0; row < 4; row++)
         {
             for (int col = 0; col < 4; col++)
@@ -90,9 +104,48 @@ public class CoreBox : MonoBehaviour
 
                     gridSlots[targetX, targetY].isOccupied = true;
                     gridSlots[targetX, targetY].placedItem = item;
+
+                    // 🎯【修正】背景のグリッド自体を染めるのをやめます！
+                    // 背景はうっすら白いままでキープし、パーツ自身のグラフィックをそのまま上に重ねます。
+                    Image slotImg = gridSlots[targetX, targetY].GetComponent<Image>();
+                    if (slotImg != null)
+                    {
+                        slotImg.color = new Color(1, 1, 1, 0.1f); // 初期の色を維持
+                    }
                 }
             }
         }
+
+        // 🎯【超重要】配置成功時にアイテム自体を透明化する処理を完全に削除しました！
+        // これにより、綺麗に並んだ黄色いパーツのグラフィックがそのままグリッドの上に残り続けます。
+
         return true;
+    }
+
+
+    // 💡 アイテムがグリッド上から去るときに、色とデータを確実にリセットする関数
+    public void ClearItemFromGrid(CoreItemUI item)
+    {
+        if (gridSlots == null || item == null) return;
+
+        for (int y = 0; y < gridHeight; y++)
+        {
+            for (int x = 0; x < gridWidth; x++)
+            {
+                // 🎯【ここを修正】配置されているアイテムが一致しているマスをすべてお掃除
+                if (gridSlots[x, y].placedItem == item)
+                {
+                    gridSlots[x, y].isOccupied = false;
+                    gridSlots[x, y].placedItem = null;
+
+                    // マスの色を初期のうっすら白い四角（元の状態）に完全に戻す！
+                    Image slotImg = gridSlots[x, y].GetComponent<Image>();
+                    if (slotImg != null)
+                    {
+                        slotImg.color = new Color(1, 1, 1, 0.1f);
+                    }
+                }
+            }
+        }
     }
 }

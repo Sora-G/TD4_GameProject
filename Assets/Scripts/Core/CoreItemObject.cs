@@ -7,7 +7,6 @@ public class CoreItemObject : MonoBehaviour
 
     void Start()
     {
-        // 💡 修正：data ではなく coreData に統一しました
         Renderer renderer = GetComponent<Renderer>();
         if (renderer != null && coreData != null)
         {

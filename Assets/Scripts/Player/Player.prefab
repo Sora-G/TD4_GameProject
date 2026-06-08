@@ -249,8 +249,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCore
   stockSlotPrefab: {fileID: 8803230071512006044, guid: 699f3abae67ba9b4ab797e8f52a7e0a0, type: 3}
-  spawnAreaPrefab: {fileID: 1483111026296892533, guid: 214bd09d2837fda4c86102b28447cc7f, type: 3}
-  testCoreData: {fileID: 0}
+  spawnAreaTransform: {fileID: 0}
+  inventoryPanel: {fileID: 0}
 --- !u!114 &3661985686086980262
 MonoBehaviour:
   m_ObjectHideFlags: 0

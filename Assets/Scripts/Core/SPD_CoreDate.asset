@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: SPD_CoreDate
   m_EditorClassIdentifier: Assembly-CSharp::CoreData
   coreName: 
+  shapePattern: 01010000010100000000000000000000
   coreColor: {r: 0, g: 0.071856976, b: 1, a: 1}
-  shapePattern: 01010000000000000000000000000000

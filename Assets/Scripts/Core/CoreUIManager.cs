@@ -8,8 +8,8 @@ public class CoreUIManager : MonoBehaviour
     [Header("開閉させるインベントリ全体の親 (CoreInventory)")]
     public GameObject coreInventory;
 
-    [Header("パーツを生成するストックの親 (TempStorage)")]
-    public Transform tempStorage;
+    [Header("パーツを生成するストックの親 (SpawnAreaをセット)")]
+    public Transform tempStorage; // 🎯 ここにインスペクターから「SpawnArea」をセットしてください
 
     private bool isOpen = false;
 
@@ -54,18 +54,23 @@ public class CoreUIManager : MonoBehaviour
 
         if (isOpen)
         {
-            // 💡 UIを開いた瞬間、ゲームの時間を完全に止める！
-            Time.timeScale = 0f;
+            // 🛑【修正】ドラッグがフリーズする原因となる Time.timeScale = 0f は廃止しました！
+            // 代わりに、戦車の移動スクリプト等で「isOpen が true の時は操作を受け付けない」ように制限するのがおすすめです。
 
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+
+            // 🔥【新機能】インベントリを開いた瞬間、SpawnAreaの中にいる全てのコアUIを一斉に強制表示（アクティブ化）！
+            if (tempStorage != null)
+            {
+                foreach (Transform child in tempStorage)
+                {
+                    child.gameObject.SetActive(true);
+                }
+            }
         }
         else
         {
-            // 💡 UIを閉じたら、ゲームの時間を1倍（通常通り）に戻す！
-            Time.timeScale = 1f;
-
-            // 必要に応じてカーソルをロックする等の処理
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
