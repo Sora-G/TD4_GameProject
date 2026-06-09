@@ -8,6 +8,7 @@ public class EnemyAttack : MonoBehaviour
     public float attackInterval = 1.0f;//攻撃のインターバル
     private float nextAttackTime = 0.0f;//次に攻撃できる時間
     private EnemyStatus enemyStatus; // 敵のステータスを入れる変数
+    public AudioClip shotSE; // 撃つときのSE
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -110,6 +111,11 @@ public class EnemyAttack : MonoBehaviour
 
         //誰が撃ったか確認
         bulletScript.GetBulletOwner();
+
+        if(shotSE != null)
+        {
+            AudioSource.PlayClipAtPoint(shotSE, transform.position, 0.9f);
+        }
 
         //Debug.Log("敵が攻撃");
     }

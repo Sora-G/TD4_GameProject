@@ -155,3 +155,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BulletController
   owner: {fileID: 0}
   moveSpeed: 0
+  hitSound: {fileID: 8300000, guid: c19b05c0faa684b4d81568caca8802f9, type: 3}

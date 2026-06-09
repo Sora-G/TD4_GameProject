@@ -126,3 +126,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BreakWall
   hp: 3
+  breakSE: {fileID: 8300000, guid: 387467003d3ae0643a28e003389d4007, type: 3}

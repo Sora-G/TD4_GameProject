@@ -5,6 +5,7 @@ public class BulletController : MonoBehaviour
     //変数宣言
     public GameObject owner;//弾の発射元を特定するための変数
     public float moveSpeed;//弾の移動速度
+    public AudioClip hitSound;//弾が当たったときの音
 
     //弾の発射元を特定するための関数
     public void GetBulletOwner()
@@ -28,6 +29,9 @@ public class BulletController : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+        
+        //弾が当たったかどうかを判定するフラグ
+        bool isHit = false;
 
         //弾の発射元がPlayerで、当たったオブジェクトがEnemyの場合
         if (owner.CompareTag("Player") && other.CompareTag("Enemy"))
@@ -40,6 +44,7 @@ public class BulletController : MonoBehaviour
                 enemy.TakeDamage(player.currentStatus.attack);//EnemyのTakeDamage関数を呼び出してダメージを与える
             }
 
+            isHit = true;
             //Debug.Log("Playerの弾がEnemyに当たった");
             Destroy(gameObject);//弾を消す
         }
@@ -54,23 +59,27 @@ public class BulletController : MonoBehaviour
                 player.TakeDamage(enemy.currentStatus.attack);//PlayerのTakeDamage関数を呼び出してダメージを与える
             }
 
+            isHit = true;
             //Debug.Log("Enemyの弾がPlayerに当たった");
             Destroy(gameObject);//弾を消す
         }
         //弾の発射元がPlayerで、当たったオブジェクトがHardWallの場合
         else if (owner.CompareTag("Player") && other.CompareTag("HardWall"))
         {
+            isHit = true;
             //Debug.Log("Enemyの弾がPlayerに当たった");
             Destroy(gameObject);//弾を消す
         }
         //弾の発射元がPlayerで、当たったオブジェクトがHardWallの場合
         else if (owner.CompareTag("Enemy") && other.CompareTag("HardWall"))
         {
+            isHit = true;
             //Debug.Log("Enemyの弾がPlayerに当たった");
             Destroy(gameObject);//弾を消す
         }
         else if (other.CompareTag("BreakWall"))
         {
+            isHit = true;
             // 当たった壁から BreakWall コンポーネントを取得
             BreakWall wall = other.GetComponent<BreakWall>();
 
@@ -79,9 +88,23 @@ public class BulletController : MonoBehaviour
                 // 壁のDamage関数を呼び出す（今回は1ダメージとします）
                 wall.Damage(1);
             }
+        }
 
-            // 弾を消す
+        if (isHit)
+        {
+            PlayHitSound();
             Destroy(gameObject);
+        }
+    }
+
+    // 弾が当たったかどうかを判定するフラグ
+    private void PlayHitSound()
+    {
+        if (hitSound != null)
+        {
+            // 現在の弾の位置（transform.position）で音を鳴らす
+            // ボリュームが小さい場合は、第3引数に「2.0f」などを指定して調整してください
+            AudioSource.PlayClipAtPoint(hitSound, transform.position, 0.9f);
         }
     }
 

@@ -266,6 +266,7 @@ MonoBehaviour:
   attackPosition: {x: 0, y: 0, z: 0}
   attackRotation: {x: 0, y: 0, z: 0}
   bulletPrefab: {fileID: 836285853692275351, guid: f7b7e0485190d3a4db11d41d3f8c83a6, type: 3}
+  shotSE: {fileID: 8300000, guid: e8e5766c00ca9eb47baddce87bee89e8, type: 3}
 --- !u!114 &5540921511808336989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -278,6 +279,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa6de312b999def4991c08b40de8a3f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStatus
+  hpSlider: {fileID: 0}
+  lifeSlider: {fileID: 0}
 --- !u!1001 &714519472493546551
 PrefabInstance:
   m_ObjectHideFlags: 0

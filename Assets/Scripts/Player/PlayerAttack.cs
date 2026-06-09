@@ -11,6 +11,8 @@ public class PlayerAttack : MonoBehaviour
     private float attackInterval = 0.5f;//攻撃のインターバル
     private float nextAttackTime = 0.0f;//次に攻撃できる時間
 
+    public AudioClip shotSE; // 撃つときのSE
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -50,6 +52,11 @@ public class PlayerAttack : MonoBehaviour
 
             //次に攻撃できる時間を更新
             nextAttackTime = Time.time + attackInterval;
+
+            if (shotSE != null)
+            {
+                AudioSource.PlayClipAtPoint(shotSE, transform.position, 0.9f);
+            }
         }
     }
 }
